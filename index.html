@@ -770,30 +770,76 @@
   .ed-title{font-size:14px;font-weight:600;line-height:1.35;color:var(--ink);max-width:280px;letter-spacing:-0.01em;}
   .ed-actions-left{display:flex;align-items:center;gap:6px;margin-left:14px;}
   .ed-icon-btn{
-    width:34px;height:34px;border-radius:8px;display:grid;place-items:center;
-    color:var(--ink-3);transition:background .15s;
+    width:38px;height:38px;border-radius:10px;display:grid;place-items:center;
+    color:#6B7280;
+    background:#FFFFFF;
+    border:1px solid #E5E7EB;
+    transition:background .15s;
   }
-  .ed-icon-btn:hover{background:var(--bg-2);color:var(--ink);}
+  .ed-icon-btn:hover{background:#F3F4F6;color:#1F2937;}
   .ed-icon-btn.saved{color:#3DA56F;}
   .ed-spacer{flex:1;}
   .ed-actions-right{display:flex;align-items:center;gap:8px;}
   .ed-btn-outline{
-    padding:9px 18px;border-radius:10px;border:1px solid var(--line-2);
-    background:#fff;font-size:13.5px;font-weight:600;color:var(--ink);
+    height:38px;
+    padding:0 18px;
+    border-radius:10px;
+    border:1px solid #E5E7EB;
+    background:#FFFFFF;
+    font-size:13.5px;
+    font-weight:700;
+    color:#10C7B8;
+    letter-spacing:-0.01em;
     transition:background .15s;
+    box-sizing:border-box;
+    display:inline-flex;
+    align-items:center;
   }
-  .ed-btn-outline:hover{background:var(--bg-2);}
+  .ed-btn-outline:hover{background:#F3F4F6;}
   .ed-btn-primary{
-    padding:9px 18px;border-radius:10px;background:#3FB6B6;color:#fff;
-    font-size:13.5px;font-weight:700;display:inline-flex;align-items:center;gap:6px;
+    height:38px;
+    padding:0 18px;
+    border-top-left-radius:10px;
+    border-bottom-left-radius:10px;
+    border-top-right-radius:0;
+    border-bottom-right-radius:0;
+    background:#10C7B8;
+    color:#fff;
+    font-size:13.5px;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
     transition:background .15s;
+    box-sizing:border-box;
   }
-  .ed-btn-primary:hover{background:#2FA0A0;}
+  .ed-btn-primary:hover{background:#0CB0A2;}
   .ed-chevron{
-    width:34px;height:34px;border-radius:8px;display:grid;place-items:center;
-    background:#3FB6B6;color:#fff;transition:background .15s;
+    width:32px;
+    height:38px;
+    border-top-right-radius:10px;
+    border-bottom-right-radius:10px;
+    border-top-left-radius:0;
+    border-bottom-left-radius:0;
+    display:grid;
+    place-items:center;
+    background:#10C7B8;
+    color:#fff;
+    transition:background .15s;
+    position:relative;
+    box-sizing:border-box;
   }
-  .ed-chevron:hover{background:#2FA0A0;}
+  .ed-chevron::before{
+    content:'';
+    position:absolute;
+    left:0; top:9px; bottom:9px;
+    width:1px;
+    background:rgba(255,255,255,0.32);
+  }
+  .ed-chevron:hover{background:#0CB0A2;}
+  /* 수업하기 + chevron 사이 gap 제거를 위해 actions-right에서 처리 */
+  .ed-actions-right .ed-btn-primary + .ed-chevron{ margin-left:-8px; }
 
   .ed-body{
     flex:1;display:grid;grid-template-columns:200px 1fr 320px;
