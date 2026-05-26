@@ -8620,6 +8620,33 @@
 
 /* ════════ END [SPECIAL-CHAR] ════════ */
 
+/* ════════════════════════════════════════════════════════════════════
+   [MEDIA-LIB-BTN] 미디어 편집 섹션 - 공용 라이브러리 버튼
+   ════════════════════════════════════════════════════════════════════ */
+  .ed-media-lib-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    width:100%;
+    height:46px;
+    background:#10C7B8;
+    color:#FFFFFF;
+    border:none;
+    border-radius:10px;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    cursor:pointer;
+    transition:background .15s;
+    margin-bottom:16px;
+  }
+  .ed-media-lib-btn:hover{ background:#0CB0A2; }
+  .ed-media-lib-btn svg{ display:block; }
+
+/* ════════ END [MEDIA-LIB-BTN] ════════ */
+
 
 
 
@@ -13815,6 +13842,16 @@
       </div>
       <div class="ed-prop-section-body">
 
+        <!-- 공용 라이브러리 버튼 -->
+        <button type="button" class="ed-media-lib-btn" onclick="window.openImageUploadModal && window.openImageUploadModal()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3.5" width="18" height="17" rx="2.5"/>
+            <circle cx="8.5" cy="9" r="1.6" fill="currentColor" stroke="none"/>
+            <path d="M3.5 17.5l5-5 4 4 3-3 5 5"/>
+          </svg>
+          공용 라이브러리
+        </button>
+
         <!-- 도형 그리기: 선/연결선/연결선(곡선)/사각형/타원/경계선 색 (6개 독립 박스) -->
         <div class="ed-img-row ed-img-shape-row">
           <button type="button" class="ed-tx-icon-btn ed-img-shape-btn${act('line')}" data-tooltip="선" data-img-shape="line">${shapeLine}</button>
@@ -13969,6 +14006,12 @@
         <span>동영상 편집</span>
       </div>
       <div class="ed-prop-section-body">
+
+        <!-- 공용 라이브러리 버튼 -->
+        <button type="button" class="ed-media-lib-btn" onclick="window.openMediaUploadModal && window.openMediaUploadModal('video')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M10.5 9.5v5l4.5-2.5-4.5-2.5z" fill="currentColor" stroke="none"/></svg>
+          공용 라이브러리
+        </button>
 
         <!-- 공통: 경계선 행 (이미지 편집과 동일 구조) -->
         <div class="ed-img-row">
@@ -14136,6 +14179,12 @@
         <span>오디오 편집</span>
       </div>
       <div class="ed-prop-section-body">
+
+        <!-- 공용 라이브러리 버튼 -->
+        <button type="button" class="ed-media-lib-btn" onclick="window.openMediaUploadModal && window.openMediaUploadModal('audio')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M10 16V8.5l6-1.5v8"/><circle cx="9" cy="16.5" r="1.6" fill="currentColor" stroke="none"/><circle cx="15" cy="15" r="1.6" fill="currentColor" stroke="none"/></svg>
+          공용 라이브러리
+        </button>
 
         <!-- 경계선 -->
         <div class="ed-img-row">
