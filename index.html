@@ -12876,20 +12876,51 @@
   // [SQUAREBOX] 사각박스 편집 활성 상태
   window.__sqEditActive = false;
   window.__sqEditOpen = false;
+
+  // [EDIT-ORDER] 우측 패널에 노출될 편집 섹션의 순서 — 새로 활성화되는 것이 맨 아래로 쌓임
+  window.__editOrder = window.__editOrder || [];
+  // 편집 종류 push (이미 있으면 끝으로 이동)
+  window._editOrderPush = function(kind){
+    if(!kind) return;
+    const arr = window.__editOrder;
+    const idx = arr.indexOf(kind);
+    if(idx >= 0) arr.splice(idx, 1);
+    arr.push(kind);
+  };
+  // 편집 종류 제거 (해당 wrap 삭제 시 호출)
+  window._editOrderRemove = function(kind){
+    const arr = window.__editOrder;
+    const idx = arr.indexOf(kind);
+    if(idx >= 0) arr.splice(idx, 1);
+  };
+  // [TAB-FOCUSED] 툴바 tab-mode 토글 전용 — 탭 박스 안에 포커스 있을 때만 true
+  window.__tabFocused = false;
   edCanvas.addEventListener('focusin', (e)=>{
     const target = e.target;
+    // 탭 박스 내부 포커스 여부 → 툴바 tab-mode 토글에 사용
+    const inTab = !!(target.closest && target.closest('[data-tab-box]'));
+    window.__tabFocused = inTab;
+
     // [SQUAREBOX] 단답형 input 또는 사각박스 input에 focus → 사각박스 편집 활성화
     if(target.classList && (target.classList.contains('tpl-short-input') || target.classList.contains('tpl-short-extra-box'))){
       window.__sqEditActive = true;
+      window._editOrderPush('sq');
       window.__textEditActive = false;
-      window.__listEditActive = false;
+      if(typeof renderRightPanel === 'function') renderRightPanel();
+      return;
+    }
+    // [TAB-BOX] 탭 박스 내부 focus → 탭 편집 활성화
+    if(inTab){
+      window.__tabEditActive = true;
+      window._editOrderPush('tab');
+      window.__textEditActive = false;
       if(typeof renderRightPanel === 'function') renderRightPanel();
       return;
     }
     // [LIST-BLOCK] 리스트 블록 내부 focus → 리스트 편집 활성화
     if(target.closest && target.closest('[data-list-block]')){
       window.__listEditActive = true;
-      window.__sqEditActive = false;
+      window._editOrderPush('list');
       window.__textEditActive = false;
       if(typeof renderRightPanel === 'function') renderRightPanel();
       return;
@@ -12898,8 +12929,7 @@
     if(!isEditable) return;
     // 정답 입력란/시스템 input은 제외 (캔버스의 콘텐츠용 텍스트 영역만)
     if(target.closest('.tb-props, .ed-right')) return;
-    window.__sqEditActive = false;
-    window.__listEditActive = false;
+    // 일반 텍스트 영역 focus — 텍스트 편집만 활성화, 다른 미디어 편집은 그대로 유지
     window.__textEditActive = true;
     if(typeof renderRightPanel === 'function') renderRightPanel();
   });
@@ -13000,133 +13030,46 @@
     const drawEl = target.closest('[data-draw-box]');
     const tabEl = target.closest('[data-tab-box]');
     const linkEl = target.closest('[data-link-block]');
+    // __tabFocused 동기화 (툴바 tab-mode 토글 전용 — 우측 패널 노출과는 별개)
+    window.__tabFocused = !!tabEl;
     if(linkEl){
       window.__linkEditActive = true;
-      window.__tabEditActive = false;
-      window.__drawEditActive = false;
-      window.__tableEditActive = false;
-      window.__imageEditActive = false;
-      window.__videoEditActive = false;
-      window.__audioEditActive = false;
-      window.__formulaEditActive = false;
-      window.__textEditActive = false;
+      window._editOrderPush('link');
       if(typeof renderRightPanel === 'function') renderRightPanel();
     } else if(tabEl){
       window.__tabEditActive = true;
-      window.__linkEditActive = false;
-      window.__drawEditActive = false;
-      window.__tableEditActive = false;
-      window.__imageEditActive = false;
-      window.__videoEditActive = false;
-      window.__audioEditActive = false;
-      window.__formulaEditActive = false;
-      window.__textEditActive = false;
+      window._editOrderPush('tab');
       if(typeof renderRightPanel === 'function') renderRightPanel();
     } else if(drawEl){
       window.__drawEditActive = true;
-      window.__linkEditActive = false;
-      window.__tabEditActive = false;
-      window.__tableEditActive = false;
-      window.__imageEditActive = false;
-      window.__videoEditActive = false;
-      window.__audioEditActive = false;
-      window.__formulaEditActive = false;
-      window.__textEditActive = false;
+      window._editOrderPush('draw');
       if(typeof showDrawToolbar === 'function') showDrawToolbar();
       if(typeof renderRightPanel === 'function') renderRightPanel();
     } else if(tableEl){
       window.__tableEditActive = true;
-      window.__linkEditActive = false;
-      window.__tabEditActive = false;
-      window.__drawEditActive = false;
-      window.__imageEditActive = false;
-      window.__videoEditActive = false;
-      window.__audioEditActive = false;
-      window.__formulaEditActive = false;
-      window.__textEditActive = false;
+      window._editOrderPush('table');
       if(typeof renderRightPanel === 'function') renderRightPanel();
     } else if(formulaEl){
       window.__formulaEditActive = true;
-      window.__linkEditActive = false;
-      window.__tabEditActive = false;
-      window.__drawEditActive = false;
-      window.__imageEditActive = false;
-      window.__videoEditActive = false;
-      window.__audioEditActive = false;
-      window.__tableEditActive = false;
-      window.__textEditActive = false;
+      window._editOrderPush('formula');
       if(typeof renderRightPanel === 'function') renderRightPanel();
     } else if(imageEl){
       window.__imageEditActive = true;
-      window.__linkEditActive = false;
-      window.__tabEditActive = false;
-      window.__drawEditActive = false;
-      window.__videoEditActive = false;
-      window.__audioEditActive = false;
-      window.__formulaEditActive = false;
-      window.__tableEditActive = false;
-      window.__textEditActive = false;
+      window._editOrderPush('image');
       if(typeof renderRightPanel === 'function') renderRightPanel();
     } else if(videoEl){
       window.__videoEditActive = true;
-      window.__linkEditActive = false;
-      window.__tabEditActive = false;
-      window.__drawEditActive = false;
-      window.__imageEditActive = false;
-      window.__audioEditActive = false;
-      window.__formulaEditActive = false;
-      window.__tableEditActive = false;
-      window.__textEditActive = false;
+      window._editOrderPush('video');
       if(videoEl.tagName === 'IFRAME') window.__videoEditKind = 'youtube';
       else if(videoEl.tagName === 'VIDEO') window.__videoEditKind = 'file';
       else if(videoEl.dataset && videoEl.dataset.libVideo) window.__videoEditKind = 'file';
       if(typeof renderRightPanel === 'function') renderRightPanel();
     } else if(audioEl){
       window.__audioEditActive = true;
-      window.__linkEditActive = false;
-      window.__tabEditActive = false;
-      window.__drawEditActive = false;
-      window.__imageEditActive = false;
-      window.__videoEditActive = false;
-      window.__formulaEditActive = false;
-      window.__tableEditActive = false;
-      window.__textEditActive = false;
+      window._editOrderPush('audio');
       if(typeof renderRightPanel === 'function') renderRightPanel();
-    } else {
-      if(window.__imageEditActive && edCanvas.contains(target)){
-        window.__imageEditActive = false;
-        if(typeof renderRightPanel === 'function') renderRightPanel();
-      }
-      if(window.__videoEditActive && edCanvas.contains(target)){
-        window.__videoEditActive = false;
-        if(typeof renderRightPanel === 'function') renderRightPanel();
-      }
-      if(window.__audioEditActive && edCanvas.contains(target)){
-        window.__audioEditActive = false;
-        if(typeof renderRightPanel === 'function') renderRightPanel();
-      }
-      if(window.__formulaEditActive && edCanvas.contains(target)){
-        window.__formulaEditActive = false;
-        if(typeof renderRightPanel === 'function') renderRightPanel();
-      }
-      if(window.__tableEditActive && edCanvas.contains(target)){
-        window.__tableEditActive = false;
-        if(typeof renderRightPanel === 'function') renderRightPanel();
-      }
-      if(window.__drawEditActive && edCanvas.contains(target)){
-        window.__drawEditActive = false;
-        if(typeof hideDrawToolbar === 'function') hideDrawToolbar();
-        if(typeof renderRightPanel === 'function') renderRightPanel();
-      }
-      if(window.__tabEditActive && edCanvas.contains(target)){
-        window.__tabEditActive = false;
-        if(typeof renderRightPanel === 'function') renderRightPanel();
-      }
-      if(window.__linkEditActive && edCanvas.contains(target)){
-        window.__linkEditActive = false;
-        if(typeof renderRightPanel === 'function') renderRightPanel();
-      }
     }
+    // 다른 곳 클릭 시 — 기존 active들을 끄지 않음 (모든 미디어 편집 누적 노출 유지)
   });
 
   // [LANDING REDESIGN] 도형 그리기 버튼 클릭 — 우측 패널에서 위임 처리 (toggle 방식)
@@ -13653,6 +13596,44 @@
     root.querySelectorAll('.ed-right-tab-pane').forEach(pane => {
       pane.classList.toggle('active', pane.dataset.tabPane === tab);
     });
+  }
+
+  // [EDIT-ORDER] 우측 패널의 모든 편집 섹션을 __editOrder 순서로 합쳐서 반환
+  // 텍스트 편집은 항상 맨 위(다른 미디어 편집과는 다른 카테고리)
+  // 미디어/구조 편집은 활성화된 순서대로 아래로 쌓임
+  function buildEditSections(s){
+    const order = window.__editOrder || [];
+    const fnMap = {
+      'image':   buildImageEditSection,
+      'video':   buildVideoEditSection,
+      'audio':   buildAudioEditSection,
+      'formula': buildFormulaEditSection,
+      'draw':    buildDrawEditSection,
+      'tab':     buildTabEditSection,
+      'link':    buildLinkEditSection,
+      'sq':      buildSqEditSection,
+      'list':    buildListEditSection,
+      'table':   buildTableSection,
+    };
+    let html = buildTextEditSection(s);
+    // __editOrder에 있는 순서대로 (먼저 활성화된 게 위, 최근 게 아래)
+    order.forEach(kind => {
+      const fn = fnMap[kind];
+      if(fn) html += fn(s);
+    });
+    // __editOrder에 없지만 active인 종류는 (안전망) 끝에 추가
+    Object.keys(fnMap).forEach(kind => {
+      if(order.indexOf(kind) >= 0) return;
+      const activeKey = ({
+        'image':'__imageEditActive','video':'__videoEditActive','audio':'__audioEditActive',
+        'formula':'__formulaEditActive','draw':'__drawEditActive','tab':'__tabEditActive',
+        'link':'__linkEditActive','sq':'__sqEditActive','list':'__listEditActive','table':'__tableEditActive'
+      })[kind];
+      if(window[activeKey]){
+        html += fnMap[kind](s);
+      }
+    });
+    return html;
   }
 
   // [LANDING REDESIGN] 표 속성 섹션 — 캔버스에 표가 있을 때만 노출
@@ -15122,16 +15103,7 @@
           ${buildRightPanelTabs()}
           <div class="ed-right-tab-pane${(window.__rightPanelTab||'props')==='props' ? ' active' : ''}" data-tab-pane="props">
             ${propsHtml}
-            ${buildTextEditSection(s)}
-            ${buildImageEditSection(s)}
-            ${buildVideoEditSection(s)}
-            ${buildAudioEditSection(s)}
-            ${buildFormulaEditSection(s)}
-            ${buildDrawEditSection(s)}
-            ${buildTabEditSection(s)}
-            ${buildLinkEditSection(s)}
-            ${buildSqEditSection(s)}
-            ${buildListEditSection(s)}
+            ${buildEditSections(s)}
           </div>
           <div class="ed-right-tab-pane${(window.__rightPanelTab||'props')==='ai' ? ' active' : ''}" data-tab-pane="ai">
             ${aiContent}
@@ -15217,16 +15189,7 @@
         </div>
         ${buildTableSection(s)}
       
-      ${buildTextEditSection(s)}
-      ${buildImageEditSection(s)}
-      ${buildVideoEditSection(s)}
-      ${buildAudioEditSection(s)}
-      ${buildFormulaEditSection(s)}
-      ${buildDrawEditSection(s)}
-      ${buildTabEditSection(s)}
-      ${buildLinkEditSection(s)}
-      ${buildSqEditSection(s)}
-      ${buildListEditSection(s)}
+      ${buildEditSections(s)}
       `;
       return `
         ${buildRightPanelTabs()}
@@ -15254,16 +15217,7 @@
         </div>
         ${buildTableSection(s)}
       
-      ${buildTextEditSection(s)}
-      ${buildImageEditSection(s)}
-      ${buildVideoEditSection(s)}
-      ${buildAudioEditSection(s)}
-      ${buildFormulaEditSection(s)}
-      ${buildDrawEditSection(s)}
-      ${buildTabEditSection(s)}
-      ${buildLinkEditSection(s)}
-      ${buildSqEditSection(s)}
-      ${buildListEditSection(s)}
+      ${buildEditSections(s)}
       `;
       const aiContent = aiSection || `<div class="ed-right-tab-empty">이 템플릿은 AI 빠른 실행을 지원하지 않습니다.</div>`;
       return `
@@ -15290,16 +15244,7 @@
             ${buildCommonToggles(s.toggles)}
           </div>
           ${buildTableSection(s)}
-          ${buildTextEditSection(s)}
-          ${buildImageEditSection(s)}
-          ${buildVideoEditSection(s)}
-          ${buildAudioEditSection(s)}
-          ${buildFormulaEditSection(s)}
-          ${buildDrawEditSection(s)}
-          ${buildTabEditSection(s)}
-          ${buildLinkEditSection(s)}
-          ${buildSqEditSection(s)}
-          ${buildListEditSection(s)}
+          ${buildEditSections(s)}
         </div>
         <div class="ed-right-tab-pane${(window.__rightPanelTab||'props')==='ai' ? ' active' : ''}" data-tab-pane="ai">
           <div class="ed-right-tab-empty">이 슬라이드는 AI 빠른 실행을 지원하지 않습니다.</div>
@@ -15326,6 +15271,16 @@
         sqBtn.setAttribute('disabled', 'disabled');
         // 단답형이 아닌 슬라이드로 이동했으면 사각박스 편집도 끄기
         if(window.__sqEditActive) window.__sqEditActive = false;
+      }
+    }
+
+    // [TAB-BOX] 탭 영역에 포커스 있을 때만 tab-mode (툴바 비활성) — 그 외엔 해제
+    const tbRow1 = document.querySelector('.tb-row1');
+    if(tbRow1){
+      if(window.__tabFocused){
+        tbRow1.classList.add('tab-mode');
+      } else {
+        tbRow1.classList.remove('tab-mode');
       }
     }
 
@@ -18339,25 +18294,60 @@
     closeBtn.addEventListener('click', (e)=>{
       e.stopPropagation();
       const wasTab = wrap.matches && wrap.matches('[data-tab-box]');
+      const wasDraw = wrap.matches && wrap.matches('[data-draw-box]');
+      // 어떤 종류의 wrap이 삭제되는지 파악 (다중 active 유지 위해)
+      const removedKinds = [];
+      if(wrap.matches){
+        if(wrap.matches('[data-tab-box]')) removedKinds.push('tab');
+        if(wrap.matches('[data-draw-box]')) removedKinds.push('draw');
+        if(wrap.matches('[data-table-wrap]')) removedKinds.push('table');
+        if(wrap.matches('[data-formula]')) removedKinds.push('formula');
+      }
+      if(wrap.querySelector){
+        if(wrap.querySelector('img, [data-placeholder-img], [data-lib-img]')) removedKinds.push('image');
+        if(wrap.querySelector('video, iframe, [data-lib-video]')) removedKinds.push('video');
+        if(wrap.querySelector('audio, [data-lib-audio]')) removedKinds.push('audio');
+      }
+
       wrap.remove();
-      // 우측 패널 닫기
-      window.__imageEditActive = false;
-      window.__videoEditActive = false;
-      window.__audioEditActive = false;
-      window.__formulaEditActive = false;
-      window.__tableEditActive = false;
-      window.__drawEditActive = false;
-      window.__tabEditActive = false;
+
+      // 삭제된 종류에 해당하는 active만 false + order에서 제거
+      const edCanvas = document.getElementById('edCanvas');
+      removedKinds.forEach(kind => {
+        if(kind === 'tab' && edCanvas && !edCanvas.querySelector('[data-tab-box]')){
+          window.__tabEditActive = false; window._editOrderRemove('tab');
+        }
+        if(kind === 'draw' && edCanvas && !edCanvas.querySelector('[data-draw-box]')){
+          window.__drawEditActive = false; window._editOrderRemove('draw');
+        }
+        if(kind === 'table' && edCanvas && !edCanvas.querySelector('[data-table-wrap]')){
+          window.__tableEditActive = false; window._editOrderRemove('table');
+        }
+        if(kind === 'formula' && edCanvas && !edCanvas.querySelector('[data-formula]')){
+          window.__formulaEditActive = false; window._editOrderRemove('formula');
+        }
+        if(kind === 'image' && edCanvas && !edCanvas.querySelector('img, [data-placeholder-img], [data-lib-img]')){
+          window.__imageEditActive = false; window._editOrderRemove('image');
+        }
+        if(kind === 'video' && edCanvas && !edCanvas.querySelector('video, iframe, [data-lib-video]')){
+          window.__videoEditActive = false; window._editOrderRemove('video');
+        }
+        if(kind === 'audio' && edCanvas && !edCanvas.querySelector('audio, [data-lib-audio]')){
+          window.__audioEditActive = false; window._editOrderRemove('audio');
+        }
+      });
+
       // 탭 박스였으면 — 캔버스에 다른 탭 박스가 남아있지 않으면 tab-mode 해제 (플로팅 툴바 복구)
       if(wasTab){
-        const edCanvas = document.getElementById('edCanvas');
         if(edCanvas && !edCanvas.querySelector('[data-tab-box]')){
           const row1 = document.querySelector('.tb-row1');
           if(row1) row1.classList.remove('tab-mode');
         }
       }
-      // 그리기 상자였으면 하단 툴바도 닫기
-      if(typeof hideDrawToolbar === 'function') hideDrawToolbar();
+      // 그리기 상자가 모두 사라지면 하단 툴바도 닫기
+      if(wasDraw && edCanvas && !edCanvas.querySelector('[data-draw-box]')){
+        if(typeof hideDrawToolbar === 'function') hideDrawToolbar();
+      }
       if(typeof renderRightPanel === 'function') renderRightPanel();
     });
 
@@ -18613,6 +18603,7 @@
         wrap.appendChild(img);
         _insertIntoCanvas(wrap);
         window.__imageEditActive = true;
+        window._editOrderPush('image');
         window.__textEditActive = false;
         setTimeout(function(){ ctxShowPanel('image'); if(typeof renderRightPanel === 'function') renderRightPanel(); }, 0);
       };
@@ -18630,6 +18621,7 @@
       wrap.appendChild(placeholder);
       _insertIntoCanvas(wrap);
       window.__imageEditActive = true;
+      window._editOrderPush('image');
       window.__textEditActive = false;
       setTimeout(function(){ ctxShowPanel('image', {isEmpty: true}); if(typeof renderRightPanel === 'function') renderRightPanel(); }, 0);
       modal.remove();
@@ -18648,6 +18640,7 @@
         wrap.appendChild(box);
         _insertIntoCanvas(wrap);
         window.__imageEditActive = true;
+        window._editOrderPush('image');
         window.__textEditActive = false;
         setTimeout(function(){ ctxShowPanel('image'); if(typeof renderRightPanel === 'function') renderRightPanel(); }, 0);
         modal.remove();
@@ -18772,6 +18765,7 @@
       wrap.appendChild(img);
       _insertIntoCanvas(wrap);
       window.__imageEditActive = true;
+      window._editOrderPush('image');
       window.__textEditActive = false;
       setTimeout(function(){ ctxShowPanel('image'); if(typeof renderRightPanel === 'function') renderRightPanel(); }, 0);
       overlay.remove();
@@ -19205,9 +19199,7 @@
         wrap.textContent = content;
         _insertIntoCanvas(wrap);
         window.__formulaEditActive = true;
-        window.__imageEditActive = false;
-        window.__videoEditActive = false;
-        window.__audioEditActive = false;
+        window._editOrderPush('formula');
         window.__textEditActive = false;
         setTimeout(function(){ if(typeof renderRightPanel === 'function') renderRightPanel(); }, 0);
         overlay.remove();
@@ -19489,7 +19481,7 @@
           _insertIntoCanvas(wrap);
           window.__videoEditActive = true;
           window.__videoEditKind = 'youtube';
-          window.__imageEditActive = false;
+          window._editOrderPush('video');
           window.__textEditActive = false;
           setTimeout(function(){ ctxShowPanel('video'); if(typeof renderRightPanel === 'function') renderRightPanel(); }, 0);
           closeYt();
@@ -19538,13 +19530,12 @@
         if(isVideo){
           window.__videoEditActive = true;
           window.__videoEditKind = 'file';
-          window.__imageEditActive = false;
+          window._editOrderPush('video');
           window.__textEditActive = false;
           setTimeout(function(){ ctxShowPanel('video'); if(typeof renderRightPanel === 'function') renderRightPanel(); }, 0);
         } else {
           window.__audioEditActive = true;
-          window.__imageEditActive = false;
-          window.__videoEditActive = false;
+          window._editOrderPush('audio');
           window.__textEditActive = false;
           setTimeout(function(){ ctxShowPanel('audio'); if(typeof renderRightPanel === 'function') renderRightPanel(); }, 0);
         }
@@ -19578,12 +19569,11 @@
           if(isVideo){
             window.__videoEditActive = true;
             window.__videoEditKind = 'file';
-            window.__imageEditActive = false;
+            window._editOrderPush('video');
             window.__textEditActive = false;
           } else {
             window.__audioEditActive = true;
-            window.__imageEditActive = false;
-            window.__videoEditActive = false;
+            window._editOrderPush('audio');
             window.__textEditActive = false;
           }
           setTimeout(function(){ ctxShowPanel(isVideo ? 'video' : 'audio'); if(typeof renderRightPanel === 'function') renderRightPanel(); }, 0);
@@ -19764,13 +19754,9 @@
     }
     wrap.appendChild(table);
     _insertIntoCanvas(wrap);
-    // 표 편집 활성화
+    // 표 편집 활성화 (다른 미디어 편집은 그대로 유지)
     window.__tableEditActive = true;
-    window.__imageEditActive = false;
-    window.__videoEditActive = false;
-    window.__audioEditActive = false;
-    window.__formulaEditActive = false;
-    window.__textEditActive = false;
+    window._editOrderPush('table');
     setTimeout(function(){ ctxShowPanel('table'); if(typeof renderRightPanel === 'function') renderRightPanel(); }, 0);
   };
   // 표 popover 외부 클릭 시 닫기
@@ -19781,12 +19767,9 @@
     picker.style.display = 'none';
   }, true);
 
-  // 탭 모드 토글 — 탭 버튼 누르면 .tb-row1.tab-mode 추가
+  // 탭 모드 토글 — 탭 버튼 누르면 __tabEditActive=true → renderRightPanel이 tab-mode 동기화
   window.insertTabBlock = function(){
     _saveCurrentSelection();
-
-    const row1 = document.querySelector('.tb-row1');
-    if(row1) row1.classList.add('tab-mode');
 
     // 탭 박스 생성
     const wrap = document.createElement('div');
@@ -19806,15 +19789,9 @@
     `;
     _insertIntoCanvas(wrap);
 
-    // 우측 패널 활성화
+    // 우측 패널 활성화 (다른 미디어 편집은 그대로 유지)
     window.__tabEditActive = true;
-    window.__drawEditActive = false;
-    window.__imageEditActive = false;
-    window.__videoEditActive = false;
-    window.__audioEditActive = false;
-    window.__formulaEditActive = false;
-    window.__tableEditActive = false;
-    window.__textEditActive = false;
+    window._editOrderPush('tab');
 
     setTimeout(function(){ ctxShowPanel('tab'); if(typeof renderRightPanel === 'function') renderRightPanel(); }, 0);
   };
@@ -19901,16 +19878,9 @@
       wrap.textContent = displayText;
       _insertIntoCanvas(wrap);
 
-      // 우측 패널 활성화
+      // 우측 패널 활성화 (다른 미디어 편집은 그대로 유지)
       window.__linkEditActive = true;
-      window.__tabEditActive = false;
-      window.__drawEditActive = false;
-      window.__imageEditActive = false;
-      window.__videoEditActive = false;
-      window.__audioEditActive = false;
-      window.__formulaEditActive = false;
-      window.__tableEditActive = false;
-      window.__textEditActive = false;
+      window._editOrderPush('link');
 
       setTimeout(function(){ ctxShowPanel('link'); if(typeof renderRightPanel === 'function') renderRightPanel(); }, 0);
       close();
@@ -19954,14 +19924,9 @@
     `;
     _insertIntoCanvas(wrap);
 
-    // 우측 패널 활성화
+    // 우측 패널 활성화 (다른 미디어 편집은 그대로 유지)
     window.__drawEditActive = true;
-    window.__imageEditActive = false;
-    window.__videoEditActive = false;
-    window.__audioEditActive = false;
-    window.__formulaEditActive = false;
-    window.__tableEditActive = false;
-    window.__textEditActive = false;
+    window._editOrderPush('draw');
 
     // 하단 그리기 툴바 노출
     showDrawToolbar();
@@ -20076,17 +20041,9 @@
       parent.appendChild(extra);
     }
 
-    // 우측 패널 활성화
+    // 우측 패널 활성화 (다른 미디어 편집은 그대로 유지)
     window.__sqEditActive = true;
-    window.__linkEditActive = false;
-    window.__tabEditActive = false;
-    window.__drawEditActive = false;
-    window.__imageEditActive = false;
-    window.__videoEditActive = false;
-    window.__audioEditActive = false;
-    window.__formulaEditActive = false;
-    window.__tableEditActive = false;
-    window.__textEditActive = false;
+    window._editOrderPush('sq');
 
     setTimeout(function(){ if(typeof renderRightPanel === 'function') renderRightPanel(); extra.focus(); }, 0);
   };
@@ -20104,18 +20061,9 @@
     `;
     _insertIntoCanvas(wrap);
 
-    // 우측 패널 활성화
+    // 우측 패널 활성화 (다른 미디어 편집은 그대로 유지)
     window.__listEditActive = true;
-    window.__sqEditActive = false;
-    window.__linkEditActive = false;
-    window.__tabEditActive = false;
-    window.__drawEditActive = false;
-    window.__imageEditActive = false;
-    window.__videoEditActive = false;
-    window.__audioEditActive = false;
-    window.__formulaEditActive = false;
-    window.__tableEditActive = false;
-    window.__textEditActive = false;
+    window._editOrderPush('list');
 
     // 첫 아이템에 focus
     setTimeout(function(){
