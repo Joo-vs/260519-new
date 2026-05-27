@@ -1413,14 +1413,14 @@
   }
   .ed-right-tab{
     flex:1; display:flex; align-items:center; justify-content:center;
-    padding:18px 8px 14px;
+    padding:14px 8px 12px;
     background:none; border:none; cursor:pointer;
-    font-family:inherit; font-size:17px; font-weight:800;
+    font-family:inherit; font-size:14px; font-weight:600;
     color:#9CA3AF;
-    border-bottom:3px solid transparent;
+    border-bottom:2.5px solid transparent;
     margin-bottom:-2px;
     transition:color .15s, border-color .15s;
-    letter-spacing:-0.02em;
+    letter-spacing:-0.01em;
   }
   .ed-right-tab:hover{ color:#6B7280; }
   .ed-right-tab.active{
@@ -1837,10 +1837,10 @@
     gap:6px;
     padding:0 8px 0 10px;
     border:1px solid #E5E7EB;
-    border-radius:10px;
+    border-radius:12px;
     background:#FFFFFF;
     cursor:pointer;
-    height:36px;
+    height:40px;
     flex-shrink:0;
   }
   .ed-img-color-swatch{
@@ -1856,10 +1856,10 @@
     display:inline-flex;
     align-items:center;
     border:1px solid #E5E7EB;
-    border-radius:10px;
+    border-radius:12px;
     background:#FFFFFF;
     padding:0 8px 0 10px;
-    height:36px;
+    height:40px;
     flex-shrink:0;
     width:62px;
   }
@@ -1887,9 +1887,9 @@
     min-width:0;
     padding:0 32px 0 14px;
     border:1px solid #E5E7EB;
-    border-radius:10px;
+    border-radius:12px;
     background:#FFFFFF;
-    height:36px;
+    height:40px;
     font-family:inherit;
     font-size:13px;
     color:#374151;
@@ -1908,9 +1908,9 @@
     min-width:0;
     padding:0 32px 0 14px;
     border:1px solid #E5E7EB;
-    border-radius:10px;
+    border-radius:12px;
     background:#FFFFFF;
-    height:36px;
+    height:40px;
     font-family:inherit;
     font-size:13px;
     color:#374151;
@@ -1946,18 +1946,19 @@
     letter-spacing:-0.01em;
     line-height:1;
     pointer-events:none;
-    font-weight:500;
+    font-weight:600;
   }
   .ed-img-size-input{
     width:100%;
     padding:11px 14px;
     border:1px solid #E5E7EB;
-    border-radius:10px;
+    border-radius:12px;
     background:#FFFFFF;
-    font-size:13.5px;
+    font-size:15px;
+    font-weight:600;
     color:#1F2937;
     font-family:inherit;
-    height:42px;
+    height:46px;
     box-sizing:border-box;
     font-variant-numeric:tabular-nums;
   }
@@ -8686,11 +8687,11 @@
     justify-content:center;
     gap:8px;
     width:100%;
-    height:46px;
+    height:50px;
     background:#10C7B8;
     color:#FFFFFF;
     border:none;
-    border-radius:10px;
+    border-radius:12px;
     font-family:inherit;
     font-size:14px;
     font-weight:700;
@@ -12563,6 +12564,9 @@
     edLeft.querySelectorAll('.ed-slide').forEach(el=>{
       el.addEventListener('click', ()=>{
         currentSlideIdx = parseInt(el.dataset.idx, 10);
+        // 슬라이드 전환 시 그리기 툴바 항상 닫기 (동일 슬라이드 재클릭 포함)
+        window.__drawEditActive = false;
+        if(typeof hideDrawToolbar === 'function') hideDrawToolbar();
         renderEditorSlides();
         renderEditorCanvas();
         renderRightPanel();
@@ -13005,6 +13009,8 @@
     Object.keys(keyMap).forEach(k => {
       if(k !== kind) window[keyMap[k]] = false;
     });
+    // draw가 아닌 다른 편집으로 전환되면 그리기 툴바 즉시 숨김
+    if(kind !== 'draw' && typeof hideDrawToolbar === 'function') hideDrawToolbar();
     // 텍스트 편집도 끔 — basic 탭은 단일 영역만 노출
     window.__textEditActive = false;
     // 단독 모드 — order 배열에 자신만
@@ -13065,6 +13071,7 @@
     window.__formulaEditActive = false;
     window.__tableEditActive = false;
     window.__drawEditActive = false;
+    if(typeof hideDrawToolbar === 'function') hideDrawToolbar();
     window.__tabEditActive = false;
     window.__linkEditActive = false;
     window.__sqEditActive = false;
@@ -13124,7 +13131,18 @@
   window.__tableEditActive = false;
   window.__tableEditOpen = false;
   // [LANDING REDESIGN] 그리기 상자 편집
-  window.__drawEditActive = false;
+  // getter/setter — false로 바뀌는 순간 자동으로 툴바 숨김 (stopPropagation 우회)
+  (function(){
+    let _v = false;
+    Object.defineProperty(window, '__drawEditActive', {
+      get(){ return _v; },
+      set(v){
+        _v = v;
+        if(!v && typeof hideDrawToolbar === 'function') hideDrawToolbar();
+      },
+      configurable: true
+    });
+  })();
   window.__drawEditOpen = false;
   // [LANDING REDESIGN] 탭 편집
   window.__tabEditActive = false;
@@ -13225,6 +13243,20 @@
       if(typeof setRightPanelTab === 'function') setRightPanelTab('basic');
     }
     // 다른 곳 클릭 시 — 기존 active들을 끄지 않음 (모든 미디어 편집 누적 노출 유지)
+    // 그리기 툴바: draw-box 외부 클릭 시 숨김 + 상태도 false로 동기화
+    if(!drawEl && !window.__suppressDrawHide){
+      window.__drawEditActive = false;
+      if(typeof hideDrawToolbar === 'function') hideDrawToolbar();
+    }
+  });
+
+  // 그리기 툴바 — draw-box·drawToolbar 외부 클릭이면 항상 숨김
+  document.addEventListener('click', (e)=>{
+    if(window.__suppressDrawHide) return;
+    if(!document.getElementById('drawToolbar')) return;
+    if(e.target.closest('[data-draw-box]') || e.target.closest('#drawToolbar')) return;
+    window.__drawEditActive = false;
+    if(typeof hideDrawToolbar === 'function') hideDrawToolbar();
   });
 
   // [LANDING REDESIGN] 도형 그리기 버튼 클릭 — 우측 패널에서 위임 처리 (toggle 방식)
@@ -15274,7 +15306,7 @@
             ${dataSecsHtml}
           </div>
         ` : '';
-        const propsHtml = tmp.innerHTML + dataCollapsible + buildTableSection(s);
+        const propsHtml = tmp.innerHTML + dataCollapsible;
         const aiContent = aiHtml || '';
         return `
           ${buildRightPanelTabs()}
@@ -15285,6 +15317,7 @@
           <div class="ed-right-tab-pane${(window.__rightPanelTab||'template')==='basic' ? ' active' : ''}" data-tab-pane="basic">
             ${buildTextEditSection(s)}
             ${buildEditSections(s)}
+            ${buildTableSection(s)}
           </div>
         `;
       }
@@ -15365,7 +15398,6 @@
         <div class="ed-prop-section-body">
           ${buildCommonToggles(s.toggles)}
         </div>
-        ${buildTableSection(s)}
       `;
       return `
         ${buildRightPanelTabs()}
@@ -15375,6 +15407,7 @@
         <div class="ed-right-tab-pane${(window.__rightPanelTab||'template')==='basic' ? ' active' : ''}" data-tab-pane="basic">
           ${buildTextEditSection(s)}
           ${buildEditSections(s)}
+          ${buildTableSection(s)}
         </div>
       `;
     }
@@ -15392,7 +15425,6 @@
           ${buildCommonToggles(s.toggles)}
           <div id="edPropExtra">${getTemplateExtras(s.template, s)}</div>
         </div>
-        ${buildTableSection(s)}
       `;
       const aiContent = aiSection || '';
       return `
@@ -15404,6 +15436,7 @@
         <div class="ed-right-tab-pane${(window.__rightPanelTab||'template')==='basic' ? ' active' : ''}" data-tab-pane="basic">
           ${buildTextEditSection(s)}
           ${buildEditSections(s)}
+          ${buildTableSection(s)}
         </div>
       `;
     }
@@ -15420,11 +15453,11 @@
           <div class="ed-prop-section-body">
             ${buildCommonToggles(s.toggles)}
           </div>
-          ${buildTableSection(s)}
         </div>
         <div class="ed-right-tab-pane${(window.__rightPanelTab||'template')==='basic' ? ' active' : ''}" data-tab-pane="basic">
           ${buildTextEditSection(s)}
           ${buildEditSections(s)}
+          ${buildTableSection(s)}
         </div>
       `;
     }
@@ -15433,6 +15466,9 @@
   }
 
   function renderRightPanel(){
+    // draw 툴바: __drawEditActive가 false이면 항상 숨김
+    if(!window.__drawEditActive && typeof hideDrawToolbar === 'function') hideDrawToolbar();
+
     const s = slides[currentSlideIdx];
     const isBlank = s && s.type === 'blank';
     const isEmptyDoc = s && s.type === 'template' && s.template === '빈 문서';
@@ -15538,6 +15574,9 @@
       ];
     }
     currentSlideIdx = 0;
+    window.__lastRenderedSlideIdx = -1; // 슬라이드 변경 감지 강제 리셋
+    window.__drawEditActive = false;
+    if(typeof hideDrawToolbar === 'function') hideDrawToolbar();
     renderEditorSlides();
     renderEditorCanvas();
     renderRightPanel();
@@ -15551,6 +15590,8 @@
     editor.classList.remove('open');
     editor.setAttribute('aria-hidden','true');
     document.body.style.overflow = '';
+    window.__drawEditActive = false;
+    if(typeof hideDrawToolbar === 'function') hideDrawToolbar();
   }
 
   // [LANDING REDESIGN] openEditor 및 관련 함수를 글로벌로 노출 — 콘텐츠 선택하기 모달의 "선택 완료"에서 호출
@@ -20134,6 +20175,10 @@
   window.insertDrawBlock = function(){
     _saveCurrentSelection();
 
+    // 삽입 버튼 클릭이 document까지 버블링되어 툴바를 즉시 숨기는 것을 방지
+    window.__suppressDrawHide = true;
+    setTimeout(function(){ window.__suppressDrawHide = false; }, 100);
+
     // 그리기 상자 wrap 생성 (공통 컨트롤은 _attachMediaControls가 부착)
     const wrap = document.createElement('div');
     wrap.dataset.drawBox = '1';
@@ -20239,6 +20284,20 @@
     const tb = document.getElementById('drawToolbar');
     if(tb) tb.remove();
   }
+
+  // 그리기 툴바 감시 — __drawEditActive 상태와 툴바 DOM을 항상 동기화
+  setInterval(function(){
+    if(window.__drawEditActive){
+      // draw 활성 상태인데 툴바가 없으면 생성
+      if(!document.getElementById('drawToolbar') && typeof showDrawToolbar === 'function'){
+        showDrawToolbar();
+      }
+    } else {
+      // draw 비활성 상태인데 툴바가 있으면 제거
+      var tb = document.getElementById('drawToolbar');
+      if(tb) tb.remove();
+    }
+  }, 150);
   window.insertQuizBlock = function(){ alert('퀴즈블록'); ctxShowPanel('quiz'); };
   window.insertMath2DBlock = function(){ alert('Math 2D'); };
   window.insertSquareboxBlock = function(){
