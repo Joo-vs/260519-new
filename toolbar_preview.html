@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>플로팅 툴바 디자인 미리보기</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+      background: #EBEBEB;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 56px 40px;
+    }
+
+    .section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #9CA3AF;
+    }
+
+    /* ── 화살표 ── */
+    .arrow-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      padding: 20px 0;
+    }
+    .arrow-line { width: 1px; height: 28px; background: #D1D5DB; }
+    .arrow-head {
+      width: 0; height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 7px solid #D1D5DB;
+    }
+    .arrow-text {
+      font-size: 11px; color: #9CA3AF;
+      font-weight: 600; letter-spacing: 0.04em; margin-top: 8px;
+    }
+
+    /* ── 공통 버튼 ── */
+    .tico {
+      position: relative;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: none; border: none; cursor: pointer;
+      color: #374151;
+      transition: background 0.15s, color 0.15s;
+      flex-shrink: 0;
+    }
+    .tico:hover { background: #E6F8F6; color: #0CB0A2; }
+    .tico svg { display: block; }
+
+    /* ── 구분선 ── */
+    .csep {
+      width: 1px; height: 20px;
+      background: #E5E7EB;
+      margin: 0 8px;
+      flex-shrink: 0;
+    }
+
+    /* ══ BEFORE ══ */
+    .toolbar-before {
+      display: inline-flex; align-items: center;
+      background: #FFFFFF;
+      border: 1px solid #E5E7EB;
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.04);
+      padding: 10px 32px;
+      gap: 2px;
+    }
+
+    /* ══ AFTER ══ */
+    .toolbar-after {
+      display: inline-flex; align-items: center;
+      background: #FFFFFF;
+      border: 1.5px solid #E3E2DD;
+      border-radius: 9999px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.04);
+      padding: 10px 28px;
+      gap: 4px;
+    }
+
+    /* 변경 요약표 */
+    .change-table {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      gap: 9px 28px;
+      font-size: 12px;
+      color: #374151;
+      align-items: center;
+      background: white;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-top: 6px;
+      max-width: 720px;
+    }
+    .change-table .th {
+      font-weight: 700; color: #6B7280;
+      font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .change-table .old { color: #EF4444; text-decoration: line-through; font-size: 11.5px; }
+    .change-table .new { color: #10B981; font-weight: 600; font-size: 11.5px; }
+    .change-table .row-divider {
+      grid-column: 1 / -1;
+      height: 1px; background: #F3F4F6; margin: 2px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ━━━━━━━━━━ BEFORE ━━━━━━━━━━ -->
+  <div class="section">
+    <div class="section-label">현재 (Before)</div>
+    <div class="toolbar-before">
+
+      <button class="tico" title="이미지 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3.5" width="18" height="17" rx="2.5"/>
+          <circle cx="8.5" cy="9" r="1.6" fill="currentColor" stroke="none"/>
+          <path d="M3.5 17.5l5-5 4 4 3-3 5 5"/>
+        </svg>
+      </button>
+
+      <button class="tico" title="동영상 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="5.5" width="18" height="13" rx="2.5"/>
+          <path d="M10.5 9.5v5l4.5-2.5-4.5-2.5z" fill="currentColor" stroke="none"/>
+        </svg>
+      </button>
+
+      <button class="tico" title="오디오 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="3" width="16" height="18" rx="2.5"/>
+          <path d="M10 16V8.5l6-1.5v8"/>
+          <circle cx="9" cy="16.5" r="1.6" fill="currentColor" stroke="none"/>
+          <circle cx="15" cy="15" r="1.6" fill="currentColor" stroke="none"/>
+        </svg>
+      </button>
+
+      <button class="tico" title="수식 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6.5" cy="6.5" r="3.5"/><line x1="4.5" y1="6.5" x2="8.5" y2="6.5"/>
+          <circle cx="17.5" cy="6.5" r="3.5"/><line x1="15.5" y1="6.5" x2="19.5" y2="6.5"/><line x1="17.5" y1="4.5" x2="17.5" y2="8.5"/>
+          <circle cx="6.5" cy="17.5" r="3.5"/><line x1="5" y1="16" x2="8" y2="19"/><line x1="8" y1="16" x2="5" y2="19"/>
+          <circle cx="17.5" cy="17.5" r="3.5"/><circle cx="17.5" cy="17.5" r="1.3" fill="currentColor" stroke="none"/>
+        </svg>
+      </button>
+
+      <button class="tico" title="표 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3.5" width="18" height="17" rx="2.5"/>
+          <line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/>
+          <line x1="9" y1="3.5" x2="9" y2="20.5"/><line x1="15" y1="3.5" x2="15" y2="20.5"/>
+        </svg>
+      </button>
+
+      <button class="tico" title="그리기 상자">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16.5 3.5l4 4-11 11H4.5v-5.5l11-9.5z"/>
+          <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"/>
+        </svg>
+      </button>
+
+      <button class="tico" title="탭 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="8" width="13" height="13" rx="2"/>
+          <path d="M8 8V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-3"/>
+          <line x1="9.5" y1="14.5" x2="9.5" y2="9.5"/><line x1="7" y1="12" x2="12" y2="12"/>
+        </svg>
+      </button>
+
+      <div class="csep"></div>
+
+      <button class="tico" title="링크 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 14a4 4 0 0 0 5.5 0l3.5-3.5a4 4 0 1 0-5.5-5.5L12 6.5"/>
+          <path d="M14 10a4 4 0 0 0-5.5 0L5 13.5a4 4 0 1 0 5.5 5.5L12 17.5"/>
+        </svg>
+      </button>
+
+      <button class="tico" title="사각박스 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8"/>
+          <line x1="18" y1="3" x2="18" y2="9"/><line x1="15" y1="6" x2="21" y2="6"/>
+        </svg>
+      </button>
+
+      <button class="tico" title="리스트 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="5" cy="6.5" r="1.3" fill="currentColor" stroke="none"/>
+          <circle cx="5" cy="12" r="1.3" fill="currentColor" stroke="none"/>
+          <circle cx="5" cy="17.5" r="1.3" fill="currentColor" stroke="none"/>
+          <line x1="9.5" y1="6.5" x2="20" y2="6.5"/>
+          <line x1="9.5" y1="12" x2="20" y2="12"/>
+          <line x1="9.5" y1="17.5" x2="20" y2="17.5"/>
+        </svg>
+      </button>
+
+      <div class="csep"></div>
+
+      <button class="tico" title="특수문자 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3.5" width="18" height="17" rx="2.5"/>
+          <polygon points="12 7.5 13.6 11 17 11.3 14.3 13.7 15.2 17 12 15.2 8.8 17 9.7 13.7 7 11.3 10.4 11 12 7.5" fill="currentColor" stroke="none"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━ 화살표 ━━━━━━━━━━ -->
+  <div class="arrow-wrap">
+    <div class="arrow-line"></div>
+    <div class="arrow-head"></div>
+    <div class="arrow-text">아이콘 결 + 컨테이너 개선</div>
+  </div>
+
+  <!-- ━━━━━━━━━━ AFTER ━━━━━━━━━━ -->
+  <div class="section">
+    <div class="section-label">개선안 (After)</div>
+    <div class="toolbar-after">
+
+      <!--
+        ★ 아이콘 개선 원칙 (Image 2 디자인 언어)
+          · stroke-width: 1.6  (얇고 섬세한 선)
+          · rx: 3  (더 부드러운 모서리)
+          · fill 최소화: 재생 버튼 등 꼭 필요한 accent만 fill
+          · 오디오: rect 프레임 제거 → 플로팅 음표
+          · 특수문자: 채워진 별 → 선형(stroke) 별
+          · 그리기: 표준 edit-pencil 형태로 통일
+      -->
+
+      <!-- 이미지: rx=3, sw=1.6, sun → stroke circle (outline) -->
+      <button class="tico" title="이미지 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="3"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <path d="M4 17.5l4.5-4.5 3.5 3.5 2.5-2.5 5 5"/>
+        </svg>
+      </button>
+
+      <!-- 동영상: rx=3, sw=1.6, wider rect (Image 2처럼 가로 비율) -->
+      <button class="tico" title="동영상 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="5" width="20" height="14" rx="3"/>
+          <path d="M10 9.5l5 2.5-5 2.5V9.5z" fill="currentColor" stroke="none"/>
+        </svg>
+      </button>
+
+      <!-- 오디오: 플로팅 음표 (rect 제거) — Image 2 스타일 -->
+      <button class="tico" title="오디오 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18V6l12-2.5V16"/>
+          <circle cx="6.5" cy="18" r="2.5"/>
+          <circle cx="18.5" cy="16" r="2.5"/>
+        </svg>
+      </button>
+
+      <!-- 수식: 4 기호 원형, sw=1.6 (더 가벼운 느낌) -->
+      <button class="tico" title="수식 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6.5" cy="6.5" r="3.5"/><line x1="4.5" y1="6.5" x2="8.5" y2="6.5"/>
+          <circle cx="17.5" cy="6.5" r="3.5"/><line x1="15.5" y1="6.5" x2="19.5" y2="6.5"/><line x1="17.5" y1="4.5" x2="17.5" y2="8.5"/>
+          <circle cx="6.5" cy="17.5" r="3.5"/><line x1="5" y1="16" x2="8" y2="19"/><line x1="8" y1="16" x2="5" y2="19"/>
+          <circle cx="17.5" cy="17.5" r="3.5"/>
+          <circle cx="17.5" cy="17.5" r="1.2" fill="currentColor" stroke="none"/>
+        </svg>
+      </button>
+
+      <!-- 표: rx=3, sw=1.6, 균형 잡힌 그리드 -->
+      <button class="tico" title="표 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="3"/>
+          <line x1="3" y1="9" x2="21" y2="9"/>
+          <line x1="3" y1="15" x2="21" y2="15"/>
+          <line x1="9" y1="3" x2="9" y2="21"/>
+          <line x1="15" y1="3" x2="15" y2="21"/>
+        </svg>
+      </button>
+
+      <!-- 그리기: 표준 edit-pencil 형태, sw=1.6 (Image 2 결 — 선형, 간결) -->
+      <button class="tico" title="그리기 상자">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 3a2.83 2.83 0 0 1 4 4L7.5 20.5 3 21l.5-4.5L17 3z"/>
+        </svg>
+      </button>
+
+      <!-- 탭: sw=1.6 통일, rx=2 -->
+      <button class="tico" title="탭 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="8" width="13" height="13" rx="2"/>
+          <path d="M8 8V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-3"/>
+          <line x1="9.5" y1="14.5" x2="9.5" y2="9.5"/>
+          <line x1="7" y1="12" x2="12" y2="12"/>
+        </svg>
+      </button>
+
+      <div class="csep"></div>
+
+      <!-- 링크: sw=1.6 -->
+      <button class="tico" title="링크 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 14a4 4 0 0 0 5.5 0l3.5-3.5a4 4 0 1 0-5.5-5.5L12 6.5"/>
+          <path d="M14 10a4 4 0 0 0-5.5 0L5 13.5a4 4 0 1 0 5.5 5.5L12 17.5"/>
+        </svg>
+      </button>
+
+      <!-- 사각박스: sw=1.6 통일 -->
+      <button class="tico" title="사각박스 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8"/>
+          <line x1="18" y1="3" x2="18" y2="9"/>
+          <line x1="15" y1="6" x2="21" y2="6"/>
+        </svg>
+      </button>
+
+      <!-- 리스트: sw=1.6, 불릿 dot 크기 1.1로 소형화 -->
+      <button class="tico" title="리스트 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="5" cy="7" r="1.1" fill="currentColor" stroke="none"/>
+          <circle cx="5" cy="12" r="1.1" fill="currentColor" stroke="none"/>
+          <circle cx="5" cy="17" r="1.1" fill="currentColor" stroke="none"/>
+          <line x1="9" y1="7" x2="20" y2="7"/>
+          <line x1="9" y1="12" x2="20" y2="12"/>
+          <line x1="9" y1="17" x2="20" y2="17"/>
+        </svg>
+      </button>
+
+      <div class="csep"></div>
+
+      <!-- 특수문자: fill 별 → stroke 별 (outline 스타일로 통일) -->
+      <button class="tico" title="특수문자 삽입">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="3"/>
+          <polygon points="12 7.5 13.5 10.8 17 11.1 14.5 13.3 15.3 16.8 12 14.9 8.7 16.8 9.5 13.3 7 11.1 10.5 10.8" stroke="currentColor" fill="none"/>
+        </svg>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━ 변경 요약 ━━━━━━━━━━ -->
+  <div style="margin-top:40px;width:100%;max-width:700px;">
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9CA3AF;margin-bottom:12px;text-align:center;">변경 사항 요약</div>
+    <div class="change-table">
+      <div class="th">항목</div>
+      <div class="th">현재</div>
+      <div class="th">개선안</div>
+
+      <div class="row-divider"></div>
+
+      <div>컨테이너 shape</div>
+      <div class="old">border-radius: 6px (각진)</div>
+      <div class="new">border-radius: 9999px (full pill)</div>
+
+      <div>컨테이너 border</div>
+      <div class="old">1px #E5E7EB (차가운 회색)</div>
+      <div class="new">1.5px #E3E2DD (따뜻한 중성)</div>
+
+      <div>그림자</div>
+      <div class="old">0 8px 28px (강하고 깊음)</div>
+      <div class="new">0 2px 10px (얕고 부드럽게)</div>
+
+      <div class="row-divider"></div>
+
+      <div>아이콘 stroke-width</div>
+      <div class="old">1.9 / 2 / 2.1 혼재</div>
+      <div class="new">1.6 전체 통일</div>
+
+      <div>rect 모서리 (rx)</div>
+      <div class="old">rx="2.5" (다소 날카로움)</div>
+      <div class="new">rx="3" (더 부드럽게)</div>
+
+      <div>오디오 아이콘</div>
+      <div class="old">rect 프레임 안 음표</div>
+      <div class="new">플로팅 음표 (rect 제거)</div>
+
+      <div>그리기 아이콘</div>
+      <div class="old">꺾인 선 2개 조합형</div>
+      <div class="new">단일 path 연필 (간결)</div>
+
+      <div>특수문자 아이콘</div>
+      <div class="old">별 ← fill (채워진 형태)</div>
+      <div class="new">별 ← stroke outline (선형)</div>
+    </div>
+  </div>
+
+</body>
+</html>
