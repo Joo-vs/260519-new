@@ -1522,6 +1522,7 @@
     margin-bottom:14px;cursor:pointer;
     letter-spacing:-0.02em;
     user-select:none;
+    line-height:1.5;
     transition:background .12s;
   }
   .ed-prop-header:hover{
@@ -1946,7 +1947,7 @@
     letter-spacing:-0.01em;
     line-height:1;
     pointer-events:none;
-    font-weight:600;
+    font-weight:500;
   }
   .ed-img-size-input{
     width:100%;
@@ -1954,8 +1955,8 @@
     border:1px solid #E5E7EB;
     border-radius:12px;
     background:#FFFFFF;
-    font-size:15px;
-    font-weight:600;
+    font-size:14px;
+    font-weight:400;
     color:#1F2937;
     font-family:inherit;
     height:46px;
@@ -2164,11 +2165,12 @@
   }
   .ed-answer-label{
     position:absolute;top:-8px;left:14px;
-    background:#F0F0F2;padding:0 6px;
-    font-size:11px;color:#6B6B6B;font-weight:500;
+    background:#FFFFFF;padding:2px 12px;border-radius:14px;
+    font-size:11px;color:#6B7280;font-weight:600;
+    letter-spacing:-0.01em;
   }
   .ed-answer-input{
-    font-size:14px;color:#1A1A1A;font-weight:500;min-height:20px;
+    font-size:13.5px;color:#1A1A1A;font-weight:500;min-height:20px;
   }
   .ed-answer-input.placeholder{color:#9CA3AF;}
 
@@ -2179,6 +2181,7 @@
     border:1.5px solid #E5E7EB;background:#fff;
     font-size:13px;font-weight:600;color:#1A1A1A;
     cursor:pointer;transition:all .15s;font-family:inherit;
+    white-space:nowrap;
   }
   .ed-pbtn:hover{border-color:#9CA3AF;}
   .ed-pbtn.active{background:#009A98;border-color:#009A98;color:#fff;}
@@ -2192,7 +2195,7 @@
   }
   .ed-num-field input{
     width:100%;border:1px solid #D9D2BD;border-radius:8px;
-    padding:10px 28px 10px 14px;font-size:15px;font-weight:700;
+    padding:10px 28px 10px 14px;font-size:14px;font-weight:500;
     color:#1A1A1A;background:#fff;outline:none;
     font-family:inherit;
   }
@@ -2906,13 +2909,13 @@
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none'><path d='M7 10l5 5 5-5' stroke='%239CA3AF' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/></svg>");
     background-repeat:no-repeat;background-position:right 12px center;
   }
-  .rp-ios-row{display:flex;align-items:center;gap:14px;padding:5px 2px;}
+  .rp-ios-row{display:flex;align-items:center;gap:14px;}
   .rp-ios-toggle{
     position:relative;width:38px;height:22px;
     border-radius:99px;border:none;cursor:pointer;padding:0;flex-shrink:0;
     background:#D4D4DC;transition:background .15s;
   }
-  .rp-ios-toggle.on{background:#0CB0A2;}
+  .rp-ios-toggle.on{background:var(--mint-dark,#009A98);}
   .rp-ios-toggle-knob{
     position:absolute;top:2px;left:2px;
     width:18px;height:18px;border-radius:50%;
@@ -2943,13 +2946,13 @@
   }
   .rp-floating-field:has(input[data-elem-act="answerText"]) .rp-floating-label{
     position:absolute;top:-8px;left:14px;
-    background:#F0F0F2;padding:0 6px;border-radius:0;
-    font-size:11px;color:#6B6B6B;font-weight:500;
-    letter-spacing:0;
+    background:#FFFFFF;padding:2px 12px;border-radius:14px;
+    font-size:11px;color:#6B7280;font-weight:600;
+    letter-spacing:-0.01em;
   }
   .rp-floating-field:has(input[data-elem-act="answerText"]) .rp-floating-input{
     border:none;padding:0;border-radius:0;
-    font-size:14px;color:#1A1A1A;font-weight:500;min-height:20px;
+    font-size:13.5px;color:#1A1A1A;font-weight:500;min-height:20px;
     background:transparent;
   }
   .rp-floating-field:has(input[data-elem-act="answerText"]) .rp-floating-input:focus{
@@ -2964,32 +2967,32 @@
     color:white;border-radius:10px;
     font-size:12.5px;font-weight:800;letter-spacing:.2px;
     cursor:pointer;font-family:inherit;
-    box-shadow:0 3px 10px rgba(35,131,226,.32),0 1px 3px rgba(35,131,226,.18);
+    box-shadow:0 3px 10px rgba(0,154,152,.32),0 1px 3px rgba(0,184,182,.18);
     transition:transform .14s ease, box-shadow .14s ease, filter .14s ease;
     animation:rpDataBtnPulse 2.6s ease-in-out infinite;
   }
   .rp-elem-data-btn:hover,
   .rp-uns-data-btn:hover{
     transform:translateY(-1px);filter:brightness(1.08);
-    box-shadow:0 5px 16px rgba(35,131,226,.42),0 2px 5px rgba(35,131,226,.28);
+    box-shadow:0 5px 16px rgba(0,154,152,.42),0 2px 5px rgba(0,184,182,.28);
     animation:none;
   }
   .rp-elem-data-btn:active,
   .rp-uns-data-btn:active{
     transform:translateY(0);
-    box-shadow:0 2px 6px rgba(35,131,226,.3);
+    box-shadow:0 2px 6px rgba(0,154,152,.3);
   }
   .rp-elem-data-btn svg,
   .rp-uns-data-btn svg{width:13px;height:13px;flex-shrink:0;}
   @keyframes rpDataBtnPulse{
-    0%,100%{box-shadow:0 3px 10px rgba(35,131,226,.32),0 1px 3px rgba(35,131,226,.18);}
-    50%{box-shadow:0 3px 14px rgba(35,131,226,.55),0 2px 6px rgba(35,131,226,.35);}
+    0%,100%{box-shadow:0 3px 10px rgba(0,154,152,.32),0 1px 3px rgba(0,184,182,.18);}
+    50%{box-shadow:0 3px 14px rgba(0,154,152,.55),0 2px 6px rgba(0,184,182,.35);}
   }
   .rp-data-head{
     display:flex;align-items:center;justify-content:space-between;
-    margin:14px 0 8px;gap:8px;
+    margin:0 0 8px;gap:8px;
   }
-  .rp-data-head-title{font-size:13px;font-weight:700;color:#1C1F2E;}
+  .rp-data-head-title{font-size:13.5px;font-weight:700;color:#1A1A1A;letter-spacing:-0.01em;}
   .rp-data-empty{font-size:12px;color:#9CA3AF;line-height:1.5;padding:8px 2px;}
   .rp-data-list{padding:4px 0;}
   .rp-data-list-header{font-size:11px;color:#6B7280;margin-bottom:6px;}
@@ -3009,18 +3012,6 @@
     display:flex;align-items:center;justify-content:center;cursor:pointer;
   }
   .rp-data-list-item .del:hover{background:#FFE5E8;}
-  .rp-speaking-choice-card{
-    margin-bottom:14px;border:1px solid #F0F2F7;border-radius:10px;
-    padding:10px 12px;background:#FAFBFD;
-  }
-  .rp-speaking-choice-head{
-    display:flex;align-items:center;justify-content:space-between;
-    gap:8px;margin-bottom:6px;
-  }
-  .rp-speaking-choice-title{font-size:12.5px;font-weight:700;color:#1C1F2E;}
-  .rp-speaking-choice-card .rp-elem-data-btn{
-    padding:6px 12px;font-size:11px;animation:none;
-  }
   .rp-color-edit-btn{
     width:24px;height:24px;border-radius:6px;
     border:1.5px solid #E5E7EB;background:white;
@@ -3043,7 +3034,7 @@
   }
   .rp-section-chev{width:14px;height:14px;flex:0 0 14px;color:#6B6B6B;transition:transform .18s;}
   .rp-section-header.collapsed .rp-section-chev{transform:rotate(-90deg);}
-  .rp-section-content{overflow:visible;transition:max-height .25s ease;padding-top:6px;}
+  .rp-section-content{overflow:visible;padding-top:6px;}
   .rp-section-header.collapsed + .rp-section-content{max-height:0;margin:0;padding:0;overflow:hidden;}
   .rp-label-pair{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#374151;}
   .rp-inline-row{display:flex;gap:8px;align-items:flex-start;}
@@ -3057,8 +3048,8 @@
   .rp-uns-chunk-text{
     font-size:12px;color:#1E2340;line-height:1.6;word-break:break-all;font-weight:600;
   }
-  .rp-uns-chunk-text .chunk-piece{
-    display:inline-block;background:#009A98;color:#fff;padding:2px 8px;border-radius:6px;margin:1px 2px;
+  .chunk-piece{
+    display:inline-block;background:#009A98;color:#fff;font-size:12px;font-weight:600;line-height:1.2;padding:2px 8px;border-radius:6px;margin:1px 2px;
   }
   .elem-canvas-area .sm-text-block:empty::before{
     content:attr(data-placeholder);color:rgba(0,0,0,0.3);pointer-events:none;
@@ -7028,7 +7019,7 @@
     transition:background .15s;
   }
   .ed-body .ed-vid-switch.on{
-    background:#10C7B8;
+    background:var(--mint-dark,#009A98);
   }
   .ed-body .ed-vid-switch-knob{
     position:absolute;
@@ -8192,7 +8183,7 @@
     display:flex; align-items:center; gap:6px;
     font-size:13.5px; font-weight:700;
     color:#1F2937;
-    margin:18px 0 12px;
+    margin:26px 0 12px;
     letter-spacing:-0.015em;
   }
   .ed-body .ed-tab-group-title::before{
@@ -8687,7 +8678,7 @@
     justify-content:center;
     gap:8px;
     width:100%;
-    height:50px;
+    height:44px;
     background:#10C7B8;
     color:#FFFFFF;
     border:none;
@@ -13675,7 +13666,7 @@
   }
 
   // 공통 헤더 SVG (▼ 화살표)
-  const HEADER_CHEVRON = '<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>';
+  const HEADER_CHEVRON = '<svg class="arrow" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
   // 5개 공통 토글 (기본값: hint/explain on)
   function buildCommonToggles(opts){
@@ -13827,8 +13818,7 @@
   function buildTextEditSection(s){
     if(!window.__textEditActive) return '';
     return `
-      <div class="ed-prop-header${window.__textEditOpen ? ' open' : ''}" data-collapsible data-text-edit-header>
-        ${HEADER_CHEVRON}
+      <div class="ed-prop-header open" data-text-edit-header>
         <span class="ed-tx-header-icon">T</span>
         <span>텍스트 편집</span>
       </div>
@@ -13959,8 +13949,7 @@
     const shapeBorderColor = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6-10 10H4v-6L14 4z"/><line x1="3" y1="22" x2="21" y2="22"/></svg>`;
 
     return `
-      <div class="ed-prop-header${window.__imageEditOpen ? ' open' : ''}" data-collapsible data-image-edit-header>
-        ${HEADER_CHEVRON}
+      <div class="ed-prop-header open" data-image-edit-header>
         <span class="ed-img-header-icon" aria-hidden="true">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="3.5" width="18" height="17" rx="2.5"/>
@@ -14128,8 +14117,7 @@
     const ctrlOn = !!window.__videoControlVisible;
 
     return `
-      <div class="ed-prop-header${window.__videoEditOpen ? ' open' : ''}" data-collapsible data-video-edit-header>
-        ${HEADER_CHEVRON}
+      <div class="ed-prop-header open" data-video-edit-header>
         <span class="ed-img-header-icon" aria-hidden="true">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M10.5 9.5v5l4.5-2.5-4.5-2.5z" fill="currentColor" stroke="none"/></svg>
         </span>
@@ -14301,8 +14289,7 @@
     const alignRight   = `<svg width="16" height="14" viewBox="0 0 24 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="2" y1="5" x2="10" y2="5"/><line x1="2" y1="9" x2="10" y2="9"/><line x1="2" y1="13" x2="10" y2="13"/><rect x="12" y="3" width="10" height="10" rx="0.6" fill="currentColor" stroke="none"/><line x1="2" y1="17" x2="22" y2="17"/></svg>`;
 
     return `
-      <div class="ed-prop-header${window.__audioEditOpen ? ' open' : ''}" data-collapsible data-audio-edit-header>
-        ${HEADER_CHEVRON}
+      <div class="ed-prop-header open" data-audio-edit-header>
         <span class="ed-img-header-icon" aria-hidden="true">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M10 16V8.5l6-1.5v8"/><circle cx="9" cy="16.5" r="1.6" fill="currentColor" stroke="none"/><circle cx="15" cy="15" r="1.6" fill="currentColor" stroke="none"/></svg>
         </span>
@@ -14426,8 +14413,7 @@
     const alignRight   = `<svg width="16" height="14" viewBox="0 0 24 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="2" y1="5" x2="10" y2="5"/><line x1="2" y1="9" x2="10" y2="9"/><line x1="2" y1="13" x2="10" y2="13"/><rect x="12" y="3" width="10" height="10" rx="0.6" fill="currentColor" stroke="none"/><line x1="2" y1="17" x2="22" y2="17"/></svg>`;
 
     return `
-      <div class="ed-prop-header${window.__formulaEditOpen ? ' open' : ''}" data-collapsible data-formula-edit-header>
-        ${HEADER_CHEVRON}
+      <div class="ed-prop-header open" data-formula-edit-header>
         <span class="ed-img-header-icon" aria-hidden="true">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="6.5" r="3.5"/><line x1="4.5" y1="6.5" x2="8.5" y2="6.5"/><circle cx="17.5" cy="6.5" r="3.5"/><line x1="15.5" y1="6.5" x2="19.5" y2="6.5"/><line x1="17.5" y1="4.5" x2="17.5" y2="8.5"/><circle cx="6.5" cy="17.5" r="3.5"/><line x1="5" y1="16" x2="8" y2="19"/><line x1="8" y1="16" x2="5" y2="19"/><circle cx="17.5" cy="17.5" r="3.5"/><circle cx="17.5" cy="17.5" r="1.3" fill="currentColor" stroke="none"/></svg>
         </span>
@@ -14532,8 +14518,7 @@
     const alignRight   = `<svg width="16" height="14" viewBox="0 0 24 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="2" y1="5" x2="10" y2="5"/><line x1="2" y1="9" x2="10" y2="9"/><line x1="2" y1="13" x2="10" y2="13"/><rect x="12" y="3" width="10" height="10" rx="0.6" fill="currentColor" stroke="none"/><line x1="2" y1="17" x2="22" y2="17"/></svg>`;
 
     return `
-      <div class="ed-prop-header${window.__drawEditOpen ? ' open' : ''}" data-collapsible data-draw-edit-header>
-        ${HEADER_CHEVRON}
+      <div class="ed-prop-header open" data-draw-edit-header>
         <span class="ed-img-header-icon" aria-hidden="true">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6-10 10H4v-6L14 4z"/><line x1="13" y1="5" x2="19" y2="11"/></svg>
         </span>
@@ -14647,16 +14632,15 @@
     // 미니 스위치 HTML (탭 편집 전용 인라인 토글 — 우측에 "전체 탭" 라벨)
     const miniSwitch = (id, on, label) => `
       <span style="display:inline-flex; align-items:center; gap:8px;">
-        <button type="button" class="ed-vid-switch${on ? ' on' : ''}" data-tab-act="${id}" aria-label="${label||''}" style="width:30px; height:18px;">
-          <span class="ed-vid-switch-knob" style="width:14px; height:14px;"></span>
+        <button type="button" class="ed-vid-switch${on ? ' on' : ''}" data-tab-act="${id}" aria-label="${label||''}">
+          <span class="ed-vid-switch-knob"></span>
         </button>
         ${label ? `<span style="font-size:12.5px; color:#1F2937;">${label}</span>` : ''}
       </span>
     `;
 
     return `
-      <div class="ed-prop-header${window.__tabEditOpen ? ' open' : ''}" data-collapsible data-tab-edit-header>
-        ${HEADER_CHEVRON}
+      <div class="ed-prop-header open" data-tab-edit-header>
         <span class="ed-img-header-icon" aria-hidden="true">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="8" width="13" height="13" rx="2"/>
@@ -14799,8 +14783,7 @@
     if(!window.__listEditActive) return '';
 
     return `
-      <div class="ed-prop-header${window.__listEditOpen ? ' open' : ''}" data-collapsible data-list-edit-header>
-        ${HEADER_CHEVRON}
+      <div class="ed-prop-header open" data-list-edit-header>
         <span class="ed-img-header-icon" aria-hidden="true">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="5" cy="6.5" r="1.3" fill="currentColor" stroke="none"/>
@@ -14936,8 +14919,7 @@
     if(!s || s.type !== 'template' || (s.template !== '단답형' && s.template !== '단답형 활동')) return '';
 
     return `
-      <div class="ed-prop-header${window.__sqEditOpen ? ' open' : ''}" data-collapsible data-sq-edit-header>
-        ${HEADER_CHEVRON}
+      <div class="ed-prop-header open" data-sq-edit-header>
         <span class="ed-img-header-icon" aria-hidden="true">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 11V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8"/>
@@ -15007,14 +14989,14 @@
         <!-- 대소문자 구분 / 띄어쓰기 구분 토글 -->
         <div class="ed-img-row" style="gap:24px; align-items:center; margin-bottom:14px;">
           <span style="display:inline-flex; align-items:center; gap:8px;">
-            <button type="button" class="ed-vid-switch on" data-sq-act="caseSensitive" aria-label="대소문자 구분" style="width:30px; height:18px;">
-              <span class="ed-vid-switch-knob" style="width:14px; height:14px;"></span>
+            <button type="button" class="ed-vid-switch on" data-sq-act="caseSensitive" aria-label="대소문자 구분">
+              <span class="ed-vid-switch-knob"></span>
             </button>
             <span style="font-size:12.5px; color:#1F2937;">대소문자 구분</span>
           </span>
           <span style="display:inline-flex; align-items:center; gap:8px;">
-            <button type="button" class="ed-vid-switch on" data-sq-act="spaceSensitive" aria-label="띄어쓰기 구분" style="width:30px; height:18px;">
-              <span class="ed-vid-switch-knob" style="width:14px; height:14px;"></span>
+            <button type="button" class="ed-vid-switch on" data-sq-act="spaceSensitive" aria-label="띄어쓰기 구분">
+              <span class="ed-vid-switch-knob"></span>
             </button>
             <span style="font-size:12.5px; color:#1F2937;">띄어쓰기 구분</span>
           </span>
@@ -15046,8 +15028,7 @@
     if(!window.__linkEditActive) return '';
 
     return `
-      <div class="ed-prop-header${window.__linkEditOpen ? ' open' : ''}" data-collapsible data-link-edit-header>
-        ${HEADER_CHEVRON}
+      <div class="ed-prop-header open" data-link-edit-header>
         <span class="ed-img-header-icon" aria-hidden="true">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.5 0l3.5-3.5a4 4 0 1 0-5.5-5.5L12 6.5"/><path d="M14 10a4 4 0 0 0-5.5 0L5 13.5a4 4 0 1 0 5.5 5.5L12 17.5"/></svg>
         </span>
@@ -15117,16 +15098,16 @@
 
         <!-- 팝업 여부 토글 -->
         <div class="ed-link-toggle-row">
-          <button type="button" class="ed-vid-switch" data-link-act="popup" aria-label="팝업 여부" style="width:30px; height:18px;">
-            <span class="ed-vid-switch-knob" style="width:14px; height:14px;"></span>
+          <button type="button" class="ed-vid-switch" data-link-act="popup" aria-label="팝업 여부">
+            <span class="ed-vid-switch-knob"></span>
           </button>
           <span class="ed-link-toggle-label">팝업 여부</span>
         </div>
 
         <!-- 링크 스타일 제거 토글 -->
         <div class="ed-link-toggle-row" style="margin-bottom:0;">
-          <button type="button" class="ed-vid-switch" data-link-act="removeStyle" aria-label="링크 스타일 제거" style="width:30px; height:18px;">
-            <span class="ed-vid-switch-knob" style="width:14px; height:14px;"></span>
+          <button type="button" class="ed-vid-switch" data-link-act="removeStyle" aria-label="링크 스타일 제거">
+            <span class="ed-vid-switch-knob"></span>
           </button>
           <span class="ed-link-toggle-label">링크 스타일 제거</span>
         </div>
@@ -15156,8 +15137,7 @@
     const rowSameH   = `<svg width="14" height="20" viewBox="0 0 20 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="10" y1="3" x2="10" y2="25"/><polyline points="6 6 10 3 14 6"/><polyline points="6 22 10 25 14 22"/></svg>`;
 
     return `
-      <div class="ed-prop-header${window.__tableEditOpen ? ' open' : ''}" data-collapsible data-table-edit-header>
-        ${HEADER_CHEVRON}
+      <div class="ed-prop-header open" data-table-edit-header>
         <span class="ed-img-header-icon" aria-hidden="true">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3.5" width="18" height="17" rx="2.5"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3.5" x2="9" y2="20.5"/><line x1="15" y1="3.5" x2="15" y2="20.5"/></svg>
         </span>
@@ -16129,9 +16109,9 @@
         slide.placement = 'left';
         slide.btnStyle = 'tf';
       }
-      // 순서조합형: 크기 모드 초기화 (undefined = auto, 텍스트에 따라)
+      // 순서조합형: 크기 모드 초기화
       if(name === '순서조합형'){
-        slide.comboSize = null;
+        slide.comboSize = 'equal';
       }
       // 연결형: 단 수 + 비율 초기화
       if(name === '연결형'){
@@ -17161,7 +17141,7 @@
     function _commonToggles(s){
       // 토글은 mathclass의 slide.toggles.hint/model/explain 와 매핑
       const tg = s.toggles || {};
-      return `<div class="rp-sec" style="display:flex;flex-direction:column;gap:4px;">
+      return `<div class="rp-sec" style="display:flex;flex-direction:column;gap:14px;">
         ${_iosToggle('힌트 보이기',     !!tg.hint,    'hint')}
         ${_iosToggle('모범 답안 보이기', !!tg.model,   'model')}
         ${_iosToggle('해설 보이기',     !!tg.explain, 'explain')}
@@ -17186,7 +17166,7 @@
       const showCount = selected === 'similar' || selected === 'twin';
       return `
         <div class="qai-section">
-          <div class="qai-head${s.qaiCollapsed?' collapsed':''}" data-elem-act="toggleQai">
+          <div class="qai-head" style="cursor:default;">
             <div class="qai-head-icon">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
                 <path d="M12 2l2.5 6.5L21 11l-6.5 2.5L12 20l-2.5-6.5L3 11l6.5-2.5L12 2z" fill="currentColor"/>
@@ -17194,8 +17174,6 @@
             </div>
             <span>빠른 실행</span>
             <span class="qai-badge">AI</span>
-            <div class="qai-head-spacer"></div>
-            <svg class="qai-head-chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <div class="qai-body">
             <div class="qai-cards">
@@ -17258,10 +17236,7 @@
             <input type="text" class="rp-floating-input" value="${_esc(entry)}" placeholder="어휘/문장 또는 {a}{b}{c} 형태" data-elem-act="unsEntry">
           </div>
         </div>
-        <div class="rp-uns-chunk-preview">
-          <div class="rp-uns-chunk-label">정답 청크 (${chunks.length}개)</div>
-          <div class="rp-uns-chunk-text">${chunks.map(c=>`<span class="chunk-piece">${_esc(c)}</span>`).join('')}</div>
-        </div>
+        <div class="rp-uns-chunk-text" style="margin-top:8px;">${chunks.map(c=>`<span class="chunk-piece">${_esc(c)}</span>`).join('')}</div>
         <div class="rp-uns-entry-field">
           <div class="rp-floating-field" style="margin-top:0;">
             <span class="rp-floating-label">추가 청크</span>
@@ -17317,19 +17292,14 @@
               </div>
               ${_renderDataList(s.elemPassages, s.elemPassageCategory, 'elemPassages')}
             </div>` : ''}
-          ${mode==='Speaking' ? `
+          ${mode==='Speaking' ? [1,2].map(i=>`
             <div class="rp-sec">
-              <div class="rp-section-label">선택지 음원</div>
-              ${[1,2].map(i=>`
-                <div class="rp-speaking-choice-card">
-                  <div class="rp-speaking-choice-head">
-                    <div class="rp-speaking-choice-title">선택지(${i})</div>
-                    <button type="button" class="rp-elem-data-btn" data-elem-act="dataSetting" data-target="elemSelectSpeakingChoice${i}">${_dataPlus()} 데이터 설정</button>
-                  </div>
-                  ${_renderDataList(s['elemChoice'+i+'Data'], s['elemChoice'+i+'Category'], 'elemChoice'+i+'Data', true)}
-                </div>
-              `).join('')}
-            </div>` : ''}
+              <div class="rp-data-head">
+                <div class="rp-data-head-title">선택지(${i})</div>
+                <button type="button" class="rp-elem-data-btn" data-elem-act="dataSetting" data-target="elemSelectSpeakingChoice${i}">${_dataPlus()} 데이터 설정</button>
+              </div>
+              ${_renderDataList(s['elemChoice'+i+'Data'], s['elemChoice'+i+'Category'], 'elemChoice'+i+'Data')}
+            </div>`).join('') : ''}
         </div>
       </div>`;
     }
@@ -17463,7 +17433,7 @@
         }
         // 청크 미리보기
         const chunks = _unsTokenize(displayEntry);
-        const chips = chunks.map(c=>`<span style="display:inline-block;background:#DBE4FF;color:#3D5BD9;padding:1px 6px;border-radius:4px;margin:0 2px 0 0;font-weight:700;font-size:10.5px;">${_esc(c)}</span>`).join('');
+        const chips = chunks.map(c=>`<span class="chunk-piece">${_esc(c)}</span>`).join('');
         const isFirst = (i===0), isLast = (i===sents.length-1);
         return `
           <div style="padding:8px 0;border-bottom:1px solid #F0F0F0;">
@@ -17488,10 +17458,9 @@
           <span>Unscramble 문항 정보</span>
         </div>
         <div class="rp-section-content">
-          <div class="rp-sec" style="display:flex;flex-direction:column;gap:4px;">
+          <div class="rp-sec" style="display:flex;flex-direction:column;gap:14px;">
             ${_iosToggle('지문 보이기',     !!s.toggles.passage, 'passage')}
             ${_iosToggle('보기 보이기',     !!s.toggles.optview, 'optview')}
-            <div style="height:6px;"></div>
             ${_iosToggle('힌트 보이기',     !!s.toggles.hint,    'hint')}
             ${_iosToggle('모범 답안 보이기', !!s.toggles.model,   'model')}
             ${_iosToggle('해설 보이기',     !!s.toggles.explain, 'explain')}
@@ -17912,13 +17881,6 @@
       const s = _currentSlide();
       if(!_isElemSlide(s)) return;
 
-      // [v8] 빠른 실행 AI — 헤더 접기/펼치기
-      const qaiHead = e.target.closest('[data-elem-act="toggleQai"]');
-      if(qaiHead){
-        s.qaiCollapsed = !s.qaiCollapsed;
-        qaiHead.classList.toggle('collapsed', !!s.qaiCollapsed);
-        return;
-      }
       // [v8] AI 카드 선택 (힌트/유사/쌍둥이)
       const qaiCard = e.target.closest('[data-elem-act="qaiAction"]');
       if(qaiCard){
@@ -18068,10 +18030,8 @@
         }
         // 청크 미리보기만 갱신 (포커스 유지)
         const chunkText = _edPropPanel.querySelector('.rp-uns-chunk-text');
-        const chunkLabel = _edPropPanel.querySelector('.rp-uns-chunk-label');
-        if(chunkText && chunkLabel){
+        if(chunkText){
           const chunks = _unsTokenize(inp.value);
-          chunkLabel.textContent = '정답 청크 (' + chunks.length + '개)';
           chunkText.innerHTML = chunks.map(c=>'<span class="chunk-piece">'+_esc(c)+'</span>').join('');
         }
         renderEditorCanvas();
