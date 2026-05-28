@@ -1630,8 +1630,8 @@
   .ed-tx-font-select{
     width:100%;
     padding:10px 32px 10px 14px;
-    border:1.5px solid #E5E7EB;
-    border-radius:8px;
+    border:1px solid #E5E7EB;
+    border-radius:10px;
     font-size:13px;
     color:#374151;
     font-family:inherit;
@@ -1646,8 +1646,8 @@
   .ed-tx-font-size{
     width:64px;
     padding:10px 12px;
-    border:1.5px solid #E5E7EB;
-    border-radius:8px;
+    border:1px solid #E5E7EB;
+    border-radius:10px;
     font-size:13px;
     color:#1F2937;
     font-family:inherit;
@@ -1695,12 +1695,12 @@
   /* 그룹 내부 버튼 — 각자 자체 보더 + 라운드 (분리된 박스) */
   .ed-tx-btn-group .ed-tx-icon-btn{
     border:1px solid #E5E7EB;
-    border-radius:8px;
+    border-radius:10px;
     background:#FFFFFF;
   }
   .ed-tx-btn-group .ed-tx-icon-btn:first-child,
   .ed-tx-btn-group .ed-tx-icon-btn:last-child{
-    border-radius:8px;
+    border-radius:10px;
   }
   .ed-tx-icon-btn{
     width:36px;
@@ -1734,7 +1734,7 @@
   /* 단독 버튼 (그룹 아닌, 양쪽정렬 등) — 자체 보더 */
   .ed-tx-icon-btn-single{
     border:1px solid #E5E7EB;
-    border-radius:8px;
+    border-radius:10px;
     background:#FFFFFF;
   }
   .ed-tx-icon-btn-single:hover{ background:#F3F4F6; }
@@ -1765,8 +1765,8 @@
     min-width:0;
     width:100%;
     padding:8px 10px;
-    border:1.5px solid #E5E7EB;
-    border-radius:8px;
+    border:1px solid #E5E7EB;
+    border-radius:10px;
     font-size:13px;
     color:#1F2937;
     font-family:inherit;
@@ -1838,7 +1838,7 @@
     gap:6px;
     padding:0 8px 0 10px;
     border:1px solid #E5E7EB;
-    border-radius:12px;
+    border-radius:10px;
     background:#FFFFFF;
     cursor:pointer;
     height:40px;
@@ -1857,7 +1857,7 @@
     display:inline-flex;
     align-items:center;
     border:1px solid #E5E7EB;
-    border-radius:12px;
+    border-radius:10px;
     background:#FFFFFF;
     padding:0 8px 0 10px;
     height:40px;
@@ -1888,7 +1888,7 @@
     min-width:0;
     padding:0 32px 0 14px;
     border:1px solid #E5E7EB;
-    border-radius:12px;
+    border-radius:10px;
     background:#FFFFFF;
     height:40px;
     font-family:inherit;
@@ -1909,7 +1909,7 @@
     min-width:0;
     padding:0 32px 0 14px;
     border:1px solid #E5E7EB;
-    border-radius:12px;
+    border-radius:10px;
     background:#FFFFFF;
     height:40px;
     font-family:inherit;
@@ -1953,7 +1953,7 @@
     width:100%;
     padding:11px 14px;
     border:1px solid #E5E7EB;
-    border-radius:12px;
+    border-radius:10px;
     background:#FFFFFF;
     font-size:14px;
     font-weight:400;
@@ -2159,7 +2159,7 @@
 
   /* 정답 입력 박스 */
   .ed-answer-box{
-    border:1px solid #D9D2BD;border-radius:10px;
+    border:1px solid #E5E7EB;border-radius:10px;
     padding:18px 14px 12px;margin-top:14px;
     position:relative;background:transparent;
   }
@@ -2178,7 +2178,7 @@
   .ed-btn-row{display:flex;gap:8px;flex-wrap:wrap;}
   .ed-pbtn{
     padding:8px 16px;border-radius:99px;
-    border:1.5px solid #E5E7EB;background:#fff;
+    border:1px solid #E5E7EB;background:#fff;
     font-size:13px;font-weight:600;color:#1A1A1A;
     cursor:pointer;transition:all .15s;font-family:inherit;
     white-space:nowrap;
@@ -2194,7 +2194,7 @@
     display:block;font-weight:500;
   }
   .ed-num-field input{
-    width:100%;border:1px solid #D9D2BD;border-radius:8px;
+    width:100%;border:1px solid #E5E7EB;border-radius:10px;
     padding:10px 28px 10px 14px;font-size:14px;font-weight:500;
     color:#1A1A1A;background:#fff;outline:none;
     font-family:inherit;
@@ -2928,7 +2928,7 @@
   .rp-section-label--strong{color:#374151;font-weight:600;}
   .rp-fmt-row{display:grid;grid-template-columns:repeat(3, 1fr);gap:8px;margin-bottom:22px;}
   .rp-fmt-style-btn{
-    background:#fff;border:1.5px solid #E5E7EB;border-radius:10px;
+    background:#fff;border:1px solid #E5E7EB;border-radius:10px;
     padding:14px 8px;min-height:64px;
     display:grid;place-items:center;cursor:pointer;
     transition:border-color .15s, background .15s;
@@ -2940,7 +2940,7 @@
 
   /* 정답 input (data-elem-act="answerText") — 일반 ed-answer-box 톤과 통일 */
   .rp-floating-field:has(input[data-elem-act="answerText"]){
-    border:1px solid #D9D2BD;border-radius:10px;
+    border:1px solid #E5E7EB;border-radius:10px;
     padding:18px 14px 12px;margin-top:14px;
     background:transparent;
   }
@@ -3013,8 +3013,8 @@
   }
   .rp-data-list-item .del:hover{background:#FFE5E8;}
   .rp-color-edit-btn{
-    width:24px;height:24px;border-radius:6px;
-    border:1.5px solid #E5E7EB;background:white;
+    width:24px;height:24px;border-radius:10px;
+    border:1px solid #E5E7EB;background:white;
     cursor:pointer;display:inline-flex;align-items:center;justify-content:center;
     transition:all .15s;flex-shrink:0;
   }
@@ -6923,8 +6923,8 @@
     min-width:0;
     width:auto;
     height:36px;
-    border:1.5px solid #E8E8E6;
-    border-radius:8px;
+    border:1px solid #E8E8E6;
+    border-radius:10px;
     background:#FFFFFF;
     color:#1F2937;
   }
@@ -6957,8 +6957,8 @@
     flex:1;
     min-width:0;
     height:36px;
-    border:1.5px solid #E8E8E6;
-    border-radius:8px;
+    border:1px solid #E8E8E6;
+    border-radius:10px;
     background:#FFFFFF;
     color:#1F2937;
     cursor:pointer;
@@ -7099,13 +7099,13 @@
     gap:6px;
   }
   .ed-body .ed-tx-btn-group .ed-tx-icon-btn{
-    border:1.5px solid #E8E8E6;
-    border-radius:8px;
+    border:1px solid #E8E8E6;
+    border-radius:10px;
     background:#FFFFFF;
   }
   .ed-body .ed-tx-btn-group .ed-tx-icon-btn:first-child,
   .ed-body .ed-tx-btn-group .ed-tx-icon-btn:last-child{
-    border-radius:8px;
+    border-radius:10px;
   }
   /* hover/active 시에도 보더 유지하되 배경/색만 변경 */
   .ed-body .ed-tx-btn-group .ed-tx-icon-btn:hover{
@@ -7205,6 +7205,7 @@
   .ai-scene-modal{
     width:1180px;
     max-width:96vw;
+    height:820px;
     max-height:94vh;
     background:#FFFFFF;
     border-radius:14px;
@@ -7617,6 +7618,97 @@
 /* ════════ END [AI-SCENE] ════════ */
 
 /* ════════════════════════════════════════════════════════════════════
+   [AI-ILLUST] AI 지문 삽화 — 라이브러리 카드 + 3단계 모달
+   ════════════════════════════════════════════════════════════════════ */
+  /* 라이브러리 카드 */
+  .img-lib-card--ai-illust .img-lib-card-thumb{
+    background:#F0FDFC;
+    border:1.5px dashed #10C7B8;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .img-lib-card--ai-illust .img-lib-card-name{
+    color:#0CB0A2; font-weight:600;
+  }
+  .img-lib-card--ai-illust:hover .img-lib-card-thumb{ background:#E6F8F6; }
+
+  /* Step 1 본문 레이아웃 — 좌측 폼 넓게 */
+  .ai-illust-body-s1{
+    flex:1;
+    display:grid;
+    grid-template-columns:380px 1fr;
+    overflow:hidden;
+    min-height:0;
+  }
+  .ai-illust-left{
+    display:flex; flex-direction:column;
+    padding:22px 20px;
+    overflow-y:auto;
+    border-right:1px solid #F3F4F6;
+  }
+  .ai-illust-right{
+    background:#F8F9FA;
+    display:flex; flex-direction:column;
+    overflow:hidden;
+  }
+
+  /* 문제 유형 선택 버튼 */
+  .ai-illust-type-grid{ display:flex; gap:8px; }
+  .ai-illust-type-btn{
+    flex:1; border:1px solid #E5E7EB; border-radius:10px;
+    padding:12px 6px; background:#fff; cursor:pointer;
+    font-family:inherit; text-align:center; transition:all .12s;
+  }
+  .ai-illust-type-btn .type-name{ font-size:13px; font-weight:600; color:#1A1A1A; display:block; margin-bottom:3px; }
+  .ai-illust-type-btn .type-desc{ font-size:10.5px; color:#9CA3AF; display:block; }
+  .ai-illust-type-btn.on{ border-color:#10C7B8; background:#F0FDFC; }
+  .ai-illust-type-btn.on .type-name{ color:#0CB0A2; }
+
+  /* 우측 빈 상태 */
+  .ai-illust-empty{
+    flex:1; display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    gap:12px; color:#9CA3AF; padding:24px; text-align:center;
+  }
+  .ai-illust-empty .em-title{ font-size:15px; font-weight:600; }
+  .ai-illust-empty .em-sub{ font-size:13px; color:#C4C4C4; }
+
+  /* AI 추천 장면 패널 */
+  .ai-illust-rec-panel{ flex:1; padding:22px; overflow-y:auto; }
+  .ai-illust-rec-title{ font-size:15px; font-weight:700; margin-bottom:4px; }
+  .ai-illust-rec-sub{ font-size:12.5px; color:#6B7280; margin-bottom:16px; }
+  .ai-illust-rec-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .ai-illust-rec-card{
+    border:1px solid #E5E7EB; border-radius:12px;
+    overflow:hidden; background:#fff; cursor:pointer; transition:all .12s;
+  }
+  .ai-illust-rec-card:hover{ border-color:#10C7B8; }
+  .ai-illust-rec-card.on{
+    border-color:#10C7B8;
+    box-shadow:0 0 0 2px rgba(16,199,184,.2);
+  }
+  .ai-illust-rec-thumb{
+    width:100%; aspect-ratio:4/3; background:#F3F4F6;
+    display:flex; align-items:center; justify-content:center; position:relative;
+  }
+  .ai-illust-rec-label{
+    position:absolute; bottom:0; left:0; right:0;
+    background:rgba(0,0,0,.3); color:#fff;
+    font-size:10.5px; text-align:center; padding:3px;
+  }
+  .ai-illust-rec-info{ padding:9px 11px; }
+  .ai-illust-rec-name{ font-size:13px; font-weight:700; margin-bottom:2px; }
+  .ai-illust-rec-desc{ font-size:11.5px; color:#6B7280; }
+
+  /* Step 3 생성 결과 이미지 영역 */
+  .ai-illust-result-img{
+    flex:1; min-height:220px;
+    background:#FEFCE8; border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden; margin-bottom:16px;
+  }
+/* ════════ END [AI-ILLUST] ════════ */
+
+/* ════════════════════════════════════════════════════════════════════
    [FORMULA] 수식 삽입 모달 + 수식 편집 섹션
    ════════════════════════════════════════════════════════════════════ */
   /* 수식 모달 오버레이 */
@@ -7781,8 +7873,8 @@
   }
   /* 수식 편집의 U/A 버튼 — 텍스트 편집의 .ed-tx-icon-btn과 동일 톤 */
   .ed-body .ed-fml-uA-btn{
-    border:1.5px solid #E8E8E6;
-    border-radius:8px;
+    border:1px solid #E8E8E6;
+    border-radius:10px;
     background:#FFFFFF;
   }
   .ed-body .ed-fml-uA-btn:hover{
@@ -7808,8 +7900,8 @@
     width:100%;
     min-height:72px;
     padding:12px 14px;
-    border:1.5px solid #E8E8E6;
-    border-radius:8px;
+    border:1px solid #E8E8E6;
+    border-radius:10px;
     background:#fff;
     font-family:'JetBrains Mono', 'Menlo', monospace;
     font-size:13px;
@@ -7837,8 +7929,8 @@
   .ed-body .ed-tbl-action-btn{
     flex:1; min-width:0;
     height:36px;
-    border:1.5px solid #E8E8E6;
-    border-radius:8px;
+    border:1px solid #E8E8E6;
+    border-radius:10px;
     background:#FFFFFF;
     color:#1F2937;
     cursor:pointer;
@@ -7864,8 +7956,8 @@
   .ed-body .ed-tbl-equal-btn{
     width:46px;
     height:36px;
-    border:1.5px solid #E8E8E6;
-    border-radius:8px;
+    border:1px solid #E8E8E6;
+    border-radius:10px;
     background:#FFFFFF;
     color:#1F2937;
     cursor:pointer;
@@ -7897,8 +7989,8 @@
     gap:6px;
     padding:0 10px;
     height:36px;
-    border:1.5px solid #E5E7EB;
-    border-radius:8px;
+    border:1px solid #E5E7EB;
+    border-radius:10px;
     background:#FFFFFF;
     color:#1F2937;
     cursor:pointer;
@@ -8213,8 +8305,8 @@
     display:inline-flex;
     align-items:center;
     gap:0;
-    border:1.5px solid #E8E8E6;
-    border-radius:8px;
+    border:1px solid #E8E8E6;
+    border-radius:10px;
     overflow:hidden;
     background:#FFFFFF;
     flex-shrink:0;
@@ -8245,8 +8337,8 @@
   /* 탭 편집 전용 경계선 행 — floating label "경계선" 박스로 묶음 */
   .ed-body .ed-tab-border-row{
     position:relative;
-    border:1.5px solid #E8E8E6;
-    border-radius:8px;
+    border:1px solid #E8E8E6;
+    border-radius:10px;
     padding:10px 12px;
     margin-top:6px;
     margin-bottom:18px;
@@ -8282,7 +8374,7 @@
     padding:8px 14px;
     background:#F3F4F6;
     border:1px solid #E5E7EB;
-    border-radius:6px;
+    border-radius:10px;
     font-family:inherit;
     font-size:12.5px;
     color:#1F2937;
@@ -8498,8 +8590,8 @@
     gap:4px;
     padding:0 8px;
     height:36px;
-    border:1.5px solid #E5E7EB;
-    border-radius:8px;
+    border:1px solid #E5E7EB;
+    border-radius:10px;
     background:#FFFFFF;
     color:#1F2937;
     cursor:pointer;
@@ -14045,7 +14137,7 @@
               <option>· · · ·</option>
             </select>
           </div>
-          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single" data-tooltip="경계선 색" data-img-act="borderColor" style="border:1.5px solid #E5E7EB; border-radius:8px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
+          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single" data-tooltip="경계선 색" data-img-act="borderColor" style="border:1px solid #E5E7EB; border-radius:10px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14 4l6 6-10 10H4v-6L14 4z"/>
               <line x1="3" y1="22" x2="21" y2="22"/>
@@ -14148,7 +14240,7 @@
               <option>· · · ·</option>
             </select>
           </div>
-          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single" data-tooltip="경계선 색" data-vid-act="borderColor" style="border:1.5px solid #E5E7EB; border-radius:8px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
+          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single" data-tooltip="경계선 색" data-vid-act="borderColor" style="border:1px solid #E5E7EB; border-radius:10px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6-10 10H4v-6L14 4z"/><line x1="3" y1="22" x2="21" y2="22"/></svg>
           </button>
         </div>
@@ -14320,7 +14412,7 @@
               <option>· · · ·</option>
             </select>
           </div>
-          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single" data-tooltip="경계선 색" data-aud-act="borderColor" style="border:1.5px solid #E5E7EB; border-radius:8px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
+          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single" data-tooltip="경계선 색" data-aud-act="borderColor" style="border:1px solid #E5E7EB; border-radius:10px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6-10 10H4v-6L14 4z"/><line x1="3" y1="22" x2="21" y2="22"/></svg>
           </button>
         </div>
@@ -14452,7 +14544,7 @@
               <option>· · · ·</option>
             </select>
           </div>
-          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single" data-tooltip="경계선 색" data-fml-act="borderColor" style="border:1.5px solid #E5E7EB; border-radius:8px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
+          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single" data-tooltip="경계선 색" data-fml-act="borderColor" style="border:1px solid #E5E7EB; border-radius:10px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6-10 10H4v-6L14 4z"/><line x1="3" y1="22" x2="21" y2="22"/></svg>
           </button>
         </div>
@@ -14543,7 +14635,7 @@
               <option>· · · ·</option>
             </select>
           </div>
-          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single" data-tooltip="경계선 색" data-draw-act="borderColor" style="border:1.5px solid #E5E7EB; border-radius:8px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
+          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single" data-tooltip="경계선 색" data-draw-act="borderColor" style="border:1px solid #E5E7EB; border-radius:10px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6-10 10H4v-6L14 4z"/><line x1="3" y1="22" x2="21" y2="22"/></svg>
           </button>
         </div>
@@ -14623,7 +14715,7 @@
             <option>· · · ·</option>
           </select>
         </div>
-        <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single" data-tooltip="경계선 색" data-tab-act="${prefix}-borderColor" style="border:1.5px solid #E5E7EB; border-radius:8px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
+        <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single" data-tooltip="경계선 색" data-tab-act="${prefix}-borderColor" style="border:1px solid #E5E7EB; border-radius:10px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6-10 10H4v-6L14 4z"/><line x1="3" y1="22" x2="21" y2="22"/></svg>
         </button>
       </div>
@@ -14841,7 +14933,7 @@
 
         <!-- 배경색 아이콘 (보더 박스) + "라운딩" 텍스트 + 라운딩 위치 + 라운딩 값 -->
         <div class="ed-img-row" style="gap:10px; align-items:center;">
-          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single ed-tx-tip" data-tooltip="배경색" data-list-act="bgColor" style="border:1.5px solid #E5E7EB; border-radius:8px; background:#FFFFFF; width:42px; height:42px; display:grid; place-items:center; flex-shrink:0;">
+          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single ed-tx-tip" data-tooltip="배경색" data-list-act="bgColor" style="border:1px solid #E5E7EB; border-radius:10px; background:#FFFFFF; width:42px; height:42px; display:grid; place-items:center; flex-shrink:0;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
               <path d="M19 11l-7-7-8 8 7 7 8-8z"/>
               <path d="M5 13.5l7 0"/>
@@ -14904,7 +14996,7 @@
               <option>· · · ·</option>
             </select>
           </div>
-          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single ed-tx-tip" data-tooltip="경계선 색" data-list-act="borderColor" style="border:1.5px solid #E5E7EB; border-radius:8px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
+          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single ed-tx-tip" data-tooltip="경계선 색" data-list-act="borderColor" style="border:1px solid #E5E7EB; border-radius:10px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6-10 10H4v-6L14 4z"/><line x1="3" y1="22" x2="21" y2="22"/></svg>
           </button>
         </div>
@@ -15053,7 +15145,7 @@
               <option>· · · ·</option>
             </select>
           </div>
-          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single" data-tooltip="경계선 색" data-link-act="borderColor" style="border:1.5px solid #E5E7EB; border-radius:8px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
+          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single" data-tooltip="경계선 색" data-link-act="borderColor" style="border:1px solid #E5E7EB; border-radius:10px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6-10 10H4v-6L14 4z"/><line x1="3" y1="22" x2="21" y2="22"/></svg>
           </button>
         </div>
@@ -15162,10 +15254,10 @@
               <option>· · · ·</option>
             </select>
           </div>
-          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single" data-tooltip="경계선 색" data-tbl-act="borderColor" style="border:1.5px solid #E5E7EB; border-radius:8px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
+          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single" data-tooltip="경계선 색" data-tbl-act="borderColor" style="border:1px solid #E5E7EB; border-radius:10px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6-10 10H4v-6L14 4z"/><line x1="3" y1="22" x2="21" y2="22"/></svg>
           </button>
-          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single" data-tooltip="표 경계선 그리기" data-tbl-act="drawBorder" style="border:1.5px solid #E5E7EB; border-radius:8px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
+          <button type="button" class="ed-tx-icon-btn ed-tx-icon-btn-single" data-tooltip="표 경계선 그리기" data-tbl-act="drawBorder" style="border:1px solid #E5E7EB; border-radius:10px; background:#FFFFFF; width:36px; height:36px; display:grid; place-items:center; flex-shrink:0;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6-10 10H4v-6L14 4z"/></svg>
           </button>
         </div>
@@ -17281,7 +17373,7 @@
           <div class="rp-sec">
             <div class="rp-floating-field">
               <span class="rp-floating-label">정답</span>
-              <input type="text" class="rp-floating-input" value="${_esc(s.answerText||'')}" placeholder="①, ②, ③ 등 정답 입력" data-elem-act="answerText">
+              <input type="text" class="rp-floating-input" value="${_esc(s.answerText||'')}" placeholder="" data-elem-act="answerText">
             </div>
           </div>
           ${mode==='Listening' ? `
@@ -18761,6 +18853,22 @@
               </span>
               <span class="img-lib-card-name">AI 장면 생성</span>
             </button>
+            <button type="button" class="img-lib-card img-lib-card--ai-illust" data-lib-pick="ai-illust">
+              <span class="img-lib-card-thumb">
+                <svg width="44" height="30" viewBox="0 0 66 44" fill="none">
+                  <rect x="2" y="4" width="62" height="36" rx="4" fill="#E0F7F5" stroke="#10C7B8" stroke-width="1.2"/>
+                  <circle cx="18" cy="16" r="5" fill="#B2EAE5"/>
+                  <path d="M10 30 Q18 22 26 30" fill="#B2EAE5"/>
+                  <line x1="32" y1="14" x2="56" y2="14" stroke="#B2EAE5" stroke-width="2.2" stroke-linecap="round"/>
+                  <line x1="32" y1="20" x2="56" y2="20" stroke="#B2EAE5" stroke-width="2.2" stroke-linecap="round"/>
+                  <line x1="32" y1="26" x2="48" y2="26" stroke="#B2EAE5" stroke-width="2.2" stroke-linecap="round"/>
+                  <circle cx="56" cy="10" r="6" fill="#10C7B8"/>
+                  <line x1="53" y1="10" x2="59" y2="10" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+                  <line x1="56" y1="7" x2="56" y2="13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span class="img-lib-card-name">AI 지문 삽화</span>
+            </button>
             <button type="button" class="img-lib-card img-lib-card--empty" data-lib-pick="empty">
               <span class="img-lib-card-thumb"></span>
               <span class="img-lib-card-name">빈 이미지</span>
@@ -18796,6 +18904,12 @@
     modal.querySelector('[data-lib-pick="ai-scene"]').addEventListener('click', ()=>{
       modal.remove();
       if(typeof window.openAiSceneModal === 'function') window.openAiSceneModal();
+    });
+
+    // AI 지문 삽화 카드 클릭 → 풀스크린 AI 지문 삽화 모달
+    modal.querySelector('[data-lib-pick="ai-illust"]').addEventListener('click', ()=>{
+      modal.remove();
+      if(typeof window.openAiIllustModal === 'function') window.openAiIllustModal();
     });
 
     // 파일 선택 시 실제로 이미지를 캔버스에 삽입
@@ -19000,7 +19114,7 @@
           <button class="ai-scene-step-btn${step1Active}"><span class="ai-scene-step-num">1</span>장면 설정</button>
           <div class="ai-scene-step-line"></div>
           <button class="ai-scene-step-btn${step2Active}"><span class="ai-scene-step-num">2</span>이미지 편집</button>
-          ${s.step === 2 ? `<button class="ai-scene-insert" data-ai-insert>이미지 삽입</button>` : ''}
+          ${s.step === 2 ? `<button class="ai-scene-insert" data-ai-insert>캔버스 적용</button>` : ''}
         </div>
       `;
 
@@ -19244,6 +19358,336 @@
                   </div>
                 `}
               </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  };
+
+  // [AI-ILLUST] AI 지문 삽화 3단계 모달
+  window.openAiIllustModal = function(){
+    _saveCurrentSelection();
+
+    const existing = document.getElementById('aiIllustModal');
+    if(existing) existing.remove();
+
+    let st = {
+      step: 1,
+      passage: '',
+      passageType: '',      // 'single' | 'sequence' | 'compare'
+      recs: [],             // 추천 장면 목록
+      selectedRec: -1,
+      style: { name:'컬러 일러스트', sub:'동화풍' },
+      ratio: '4:3',
+      generating: false,
+      history: [],
+      activeIdx: -1,
+    };
+
+    const overlay = document.createElement('div');
+    overlay.id = 'aiIllustModal';
+    overlay.className = 'ai-scene-overlay';
+    overlay.innerHTML = render();
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener('click', (e)=>{
+      const t = e.target;
+      if(t.closest('[data-ail-close]')){ overlay.remove(); return; }
+      if(t.closest('[data-ail-gen-rec]')){ genRecommendations(); return; }
+      if(t.closest('[data-ail-step2]')){ st.step = 2; rerender(); return; }
+      if(t.closest('[data-ail-generate]')){ startGenerate(); return; }
+      if(t.closest('[data-ail-cancel]')){ st.generating = false; rerender(); return; }
+      if(t.closest('[data-ail-back]')){ st.step = Math.max(1, st.step - 1); st.generating = false; rerender(); return; }
+      if(t.closest('[data-ail-insert]')){ insertToCanvas(); return; }
+      const typeBtn = t.closest('[data-ail-type]');
+      if(typeBtn){ st.passageType = typeBtn.dataset.ailType; rerender(); return; }
+      const recCard = t.closest('[data-ail-rec]');
+      if(recCard){ st.selectedRec = parseInt(recCard.dataset.ailRec, 10); st.step = 2; rerender(); return; }
+      const chip = t.closest('[data-ail-ratio]');
+      if(chip){ st.ratio = chip.dataset.ailRatio; rerender(); return; }
+      const histItem = t.closest('[data-ail-hist-idx]');
+      if(histItem){ st.activeIdx = parseInt(histItem.dataset.ailHistIdx, 10); rerender(); return; }
+      if(t.closest('[data-ail-hist-clear]')){ st.history = []; st.activeIdx = -1; rerender(); return; }
+    });
+
+    overlay.addEventListener('input', (e)=>{
+      if(e.target.matches('[data-ail-passage]')) st.passage = e.target.value;
+    });
+
+    function rerender(){ overlay.innerHTML = render(); }
+
+    function genRecommendations(){
+      if(!st.passage.trim() || !st.passageType) return;
+      st.generating = true;
+      rerender();
+      setTimeout(()=>{
+        if(!document.getElementById('aiIllustModal')) return;
+        st.generating = false;
+        st.recs = [
+          { name:'추천 장면 1', desc:'지문의 핵심 장면' },
+          { name:'추천 장면 2', desc:'대안 시점' },
+          { name:'추천 장면 3', desc:'배경 강조' },
+        ];
+        st.selectedRec = 0;
+        rerender();
+      }, 1200);
+    }
+
+    function startGenerate(){
+      st.generating = true;
+      rerender();
+      setTimeout(()=>{
+        if(!document.getElementById('aiIllustModal')) return;
+        st.generating = false;
+        const now = new Date();
+        const ts = `${now.getMonth()+1}월 ${now.getDate()}일 ${now.getHours()<12?'오전':'오후'} ${String(now.getHours()%12||12).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+        st.history.unshift({ time:ts, id:Date.now() });
+        st.activeIdx = 0;
+        st.step = 3;
+        rerender();
+      }, 1800);
+    }
+
+    function insertToCanvas(){
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'margin:14px 0;text-align:center;';
+      const img = document.createElement('div');
+      img.style.cssText = 'display:inline-block;padding:20px;background:#FEFCE8;border-radius:8px;';
+      img.dataset.libImg = 'ai-generated-illust';
+      img.innerHTML = `<svg width="320" height="240" viewBox="0 0 80 60" fill="none">
+        <rect width="80" height="60" fill="#FEFCE8"/>
+        <circle cx="30" cy="20" r="8" fill="#FDE68A"/>
+        <path d="M20 38 Q30 28 40 38" fill="#FCA5A5"/>
+        <rect x="48" y="22" width="24" height="18" rx="2" fill="#BFDBFE"/>
+      </svg>`;
+      wrap.appendChild(img);
+      _insertIntoCanvas(wrap);
+      window.__imageEditActive = true;
+      window.__imageEditOpen = true;
+      window._editOrderPush('image');
+      window.__textEditActive = false;
+      setTimeout(function(){ ctxShowPanel('image'); if(typeof renderRightPanel === 'function') renderRightPanel(); }, 0);
+      overlay.remove();
+    }
+
+    function render(){
+      const s = st;
+      const ratios = ['1:1','4:3','3:2','16:9'];
+      const canGenRec = s.passage.trim().length > 0 && s.passageType;
+
+      const stepperHtml = `
+        <div class="ai-scene-stepper">
+          <button class="ai-scene-close" data-ail-close aria-label="닫기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+          <button class="ai-scene-step-btn${s.step===1?' active':''}">
+            <span class="ai-scene-step-num" style="${s.step>1?'background:#D1FAE5;color:#059669;':''}">${s.step>1?'✓':'1'}</span>지문 분석
+          </button>
+          <div class="ai-scene-step-line"></div>
+          <button class="ai-scene-step-btn${s.step===2?' active':''}">
+            <span class="ai-scene-step-num" style="${s.step>2?'background:#D1FAE5;color:#059669;':''}">${s.step>2?'✓':'2'}</span>장면 설정
+          </button>
+          <div class="ai-scene-step-line"></div>
+          <button class="ai-scene-step-btn${s.step===3?' active':''}">
+            <span class="ai-scene-step-num">3</span>이미지 편집
+          </button>
+          ${s.step===3
+            ? `<button class="ai-scene-insert" data-ail-insert>캔버스 적용</button>`
+            : `<button class="ai-scene-insert" style="background:#D1D5DB;cursor:not-allowed;" disabled>캔버스 적용</button>`}
+        </div>
+      `;
+
+      /* ── STEP 1 ── */
+      if(s.step === 1){
+        const recCardsHtml = s.recs.map((r, i) => `
+          <div class="ai-illust-rec-card${i===s.selectedRec?' on':''}" data-ail-rec="${i}">
+            <div class="ai-illust-rec-thumb">
+              <svg width="100%" height="100%" viewBox="0 0 80 60" preserveAspectRatio="xMidYMid slice" fill="none">
+                <rect width="80" height="60" fill="#F3F4F6"/>
+                <circle cx="${28+i*2}" cy="${18+i}" r="${6+i}" fill="#FDE68A"/>
+                <path d="M${20+i} ${34+i} Q${28+i*2} ${26+i} ${36+i*2} ${34+i}" fill="#A7D8C8"/>
+                <rect x="${46-i*2}" y="${18+i}" width="24" height="16" rx="2" fill="#DBEAFE"/>
+              </svg>
+              <div class="ai-illust-rec-label">미리보기</div>
+            </div>
+            <div class="ai-illust-rec-info">
+              <div class="ai-illust-rec-name">${r.name}</div>
+              <div class="ai-illust-rec-desc">${r.desc}</div>
+            </div>
+          </div>
+        `).join('');
+
+        return `
+          <div class="ai-scene-modal">
+            ${stepperHtml}
+            <div class="ai-illust-body-s1">
+              <div class="ai-illust-left">
+                <div style="font-size:16px;font-weight:700;margin-bottom:4px;">지문 입력 및 유형 선택</div>
+                <div style="font-size:12.5px;color:#6B7280;margin-bottom:18px;">문제 지문을 입력하고 어떤 유형의 삽화를 만들지 선택하세요</div>
+                <div class="ai-scene-field">
+                  <div class="ai-scene-field-label">지문 내용 <sup style="color:#EF4444;font-size:10px;">*</sup> <span class="ai-scene-field-q">?</span></div>
+                  <textarea class="ai-scene-input" data-ail-passage style="height:150px;resize:vertical;" placeholder="시험 문제에 사용할 지문을 입력하세요.&#10;&#10;동화, 설명문, 논설문 등 모든 유형의 텍스트를 입력할 수 있습니다.">${s.passage}</textarea>
+                </div>
+                <div class="ai-scene-field">
+                  <div class="ai-scene-field-label">문제 유형 선택 <sup style="color:#EF4444;font-size:10px;">*</sup> <span class="ai-scene-field-q">?</span></div>
+                  <div class="ai-illust-type-grid">
+                    <button class="ai-illust-type-btn${s.passageType==='single'?' on':''}" data-ail-type="single"><span class="type-name">단일 장면</span><span class="type-desc">하나의 핵심 장면</span></button>
+                    <button class="ai-illust-type-btn${s.passageType==='sequence'?' on':''}" data-ail-type="sequence"><span class="type-name">순서/과정</span><span class="type-desc">단계별 흐름 시각화</span></button>
+                    <button class="ai-illust-type-btn${s.passageType==='compare'?' on':''}" data-ail-type="compare"><span class="type-name">비교/대조</span><span class="type-desc">대비되는 두 장면</span></button>
+                  </div>
+                </div>
+                <div style="margin-top:auto;padding-top:14px;">
+                  <button class="ai-scene-cta" data-ail-gen-rec ${s.generating||!canGenRec?'disabled':''} style="${!canGenRec?'background:#E5E7EB;color:#9CA3AF;cursor:not-allowed;':''}">
+                    ${s.generating
+                      ? `<span style="display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:aiSpin .9s linear infinite;"></span> 분석 중...`
+                      : `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> + 장면 추천받기`}
+                  </button>
+                  ${!canGenRec && !s.generating ? `<div style="text-align:center;font-size:11.5px;color:#9CA3AF;margin-top:8px;">${!s.passage.trim()?'지문을 먼저 입력해 주세요':'문제 유형을 선택해 주세요'}</div>` : ''}
+                </div>
+              </div>
+              <div class="ai-illust-right">
+                ${s.recs.length > 0 ? `
+                  <div class="ai-illust-rec-panel">
+                    <div class="ai-illust-rec-title">AI 추천 장면</div>
+                    <div class="ai-illust-rec-sub">지문에서 분석한 핵심 장면을 골라주세요</div>
+                    <div class="ai-illust-rec-grid">${recCardsHtml}</div>
+                  </div>
+                ` : `
+                  <div class="ai-illust-empty">
+                    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5" fill="#D1D5DB" stroke="none"/><polyline points="21 15 16 10 5 21" stroke="#D1D5DB"/></svg>
+                    <div class="em-title">생성된 삽화가 여기에 표시됩니다</div>
+                    <div class="em-sub">지문을 입력하고 AI 추천을 받아보세요</div>
+                  </div>
+                `}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      /* ── STEP 2 ── */
+      if(s.step === 2){
+        return `
+          <div class="ai-scene-modal">
+            ${stepperHtml}
+            <div class="ai-scene-body">
+              <div style="overflow-y:auto;">
+                <div class="ai-scene-field">
+                  <div class="ai-scene-field-label">화풍 선택 <span class="ai-scene-field-q">?</span></div>
+                  <div class="ai-scene-style-row">
+                    <div class="ai-scene-style-thumb"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
+                    <div class="ai-scene-style-info"><div class="ai-scene-style-name">${s.style.name}</div><div class="ai-scene-style-sub">${s.style.sub}</div></div>
+                    <button class="ai-scene-style-change">변경</button>
+                  </div>
+                </div>
+                <div class="ai-scene-field">
+                  <div class="ai-scene-targets-head">
+                    <div class="ai-scene-field-label" style="margin:0;">등장 대상 <span class="ai-scene-field-q">?</span></div>
+                    <button class="ai-scene-add-btn">+ 추가</button>
+                  </div>
+                  <div class="ai-scene-target-card" style="margin-top:10px;">
+                    <div class="ai-scene-target-head"><span class="ai-scene-target-title">대상 1</span><button class="ai-scene-target-del">삭제</button></div>
+                    <div class="ai-scene-sub-label">대상 <sup>*</sup></div>
+                    <input class="ai-scene-input" value="주인공" placeholder="대상을 입력">
+                    <div class="ai-scene-sub-label" style="margin-top:6px;">상황 (선택)</div>
+                    <input class="ai-scene-input" placeholder="지문 내용에 맞는 행동">
+                  </div>
+                </div>
+                <div class="ai-scene-field">
+                  <div class="ai-scene-field-label">배경 (선택) <span class="ai-scene-field-q">?</span></div>
+                  <input class="ai-scene-input" placeholder="비워두면 배경 없이 생성 (예: 교실, 공원, 카페)">
+                  <div class="ai-scene-chips" style="margin-top:8px;">
+                    <button class="ai-scene-chip">교실</button><button class="ai-scene-chip">공원</button><button class="ai-scene-chip">카페</button><button class="ai-scene-chip">운동장</button><button class="ai-scene-chip">집 앞</button><button class="ai-scene-chip">도서관</button><button class="ai-scene-chip">숲속</button>
+                  </div>
+                </div>
+                <div class="ai-scene-field">
+                  <div class="ai-scene-field-label">제외할 요소 (선택사항) <span class="ai-scene-field-q">?</span></div>
+                  <textarea class="ai-scene-input" style="height:68px;resize:vertical;" placeholder="예: 그림자, 복잡한 배경, 텍스트, 숫자 등을 쉼표로 구분하여 입력"></textarea>
+                </div>
+                <div class="ai-scene-field">
+                  <div class="ai-scene-field-label">이미지 비율 <span class="ai-scene-field-q">?</span></div>
+                  <div class="ai-scene-chips">
+                    ${ratios.map(r=>`<button class="ai-scene-chip${s.ratio===r?' on':''}" data-ail-ratio="${r}">${r}</button>`).join('')}
+                  </div>
+                </div>
+                <div style="display:flex;gap:10px;padding-top:4px;">
+                  <button class="ai-scene-back-btn" data-ail-back style="flex:0 0 100px;"><span>← 이전</span><span class="ai-scene-back-btn-sub"></span></button>
+                  <button class="ai-scene-cta" data-ail-generate style="flex:1;margin-top:0;" ${s.generating?'disabled':''}>
+                    ${s.generating
+                      ? `<span style="display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:aiSpin .9s linear infinite;"></span> AI 생성 중...`
+                      : `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3l1.6 5.6L19 10l-5.4 1.4L12 17l-1.6-5.6L5 10l5.4-1.4L12 3z"/></svg> + 삽화 생성하기`}
+                  </button>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;padding:12px;">
+                <div style="display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-bottom:10px;">
+                  <span style="font-size:12px;color:#6B7280;">카메라 시점</span>
+                  <div style="display:inline-flex;border:1px solid #E5E7EB;border-radius:8px;overflow:hidden;">
+                    <button style="padding:5px 11px;background:#10C7B8;border:none;color:#fff;font-size:12px;cursor:pointer;font-family:inherit;">기본</button>
+                    <button style="padding:5px 11px;background:#fff;border:none;color:#9CA3AF;font-size:12px;cursor:pointer;font-family:inherit;">탭뷰</button>
+                  </div>
+                </div>
+                <div class="ai-scene-canvas" style="flex:1;">
+                  <div class="ai-scene-canvas-grid"></div>
+                  <div class="ai-scene-canvas-ratio">${s.ratio}</div>
+                  <div class="ai-scene-pin" style="top:55%;left:35%;background:#3B82F6;">1</div>
+                  ${s.generating ? `<div class="ai-scene-gen-overlay"><div class="ai-scene-gen-spin"></div><div class="ai-scene-gen-text">AI 삽화 생성 중...</div><div class="ai-scene-gen-sub">잠시만 기다려주세요</div><div class="ai-scene-gen-meta">평소 20초 내외</div><button class="ai-scene-gen-cancel" data-ail-cancel>취소</button></div>` : ''}
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding:0 2px;">
+                  <span style="font-size:11px;color:#9CA3AF;">멀리</span>
+                  <input type="range" min="0" max="100" value="50" style="flex:1;margin:0 10px;accent-color:#10C7B8;">
+                  <span style="font-size:11px;color:#9CA3AF;">가까이</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      /* ── STEP 3 ── */
+      return `
+        <div class="ai-scene-modal">
+          ${stepperHtml}
+          <div class="ai-scene-body">
+            <div style="display:flex;flex-direction:column;">
+              <div style="font-size:15px;font-weight:700;margin-bottom:4px;">생성된 삽화</div>
+              <div style="font-size:12.5px;color:#6B7280;margin-bottom:14px;">생성된 이미지를 확인하고 캔버스에 추가하세요.</div>
+              <div class="ai-illust-result-img">
+                <svg width="240" height="180" viewBox="0 0 80 60" fill="none">
+                  <rect width="80" height="60" fill="#FEFCE8"/>
+                  <circle cx="30" cy="20" r="8" fill="#FDE68A"/>
+                  <path d="M20 38 Q30 28 40 38" fill="#FCA5A5"/>
+                  <rect x="48" y="22" width="24" height="18" rx="2" fill="#BFDBFE"/>
+                  <line x1="50" y1="26" x2="70" y2="26" stroke="#93C5FD" stroke-width="1"/>
+                  <line x1="50" y1="29" x2="70" y2="29" stroke="#93C5FD" stroke-width="1"/>
+                  <line x1="50" y1="32" x2="62" y2="32" stroke="#93C5FD" stroke-width="1"/>
+                </svg>
+              </div>
+              <div style="display:flex;gap:10px;margin-top:auto;">
+                <button class="ai-scene-back-btn" data-ail-back style="flex:0 0 110px;"><span>← 다시 생성</span><span class="ai-scene-back-btn-sub"></span></button>
+                <button class="ai-scene-cta" data-ail-insert style="flex:1;margin-top:0;">캔버스에 추가</button>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;background:#F8F9FA;border-radius:10px;padding:16px;overflow-y:auto;">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                <div style="font-size:14px;font-weight:700;">히스토리 <span style="color:#9CA3AF;font-size:13px;font-weight:400;">(${s.history.length} / 50개)</span></div>
+                ${s.history.length>0?`<button class="ai-scene-history-clear" data-ail-hist-clear>전체 삭제</button>`:''}
+              </div>
+              ${s.history.length===0
+                ? `<div class="ai-scene-history-empty">AI로 삽화를 생성하면 여기에 자동으로 저장됩니다<br><span style="font-size:11px;opacity:.6;">0 / 50개</span></div>`
+                : `<div class="ai-scene-history-list">
+                    ${s.history.map((h,idx)=>`
+                      <div class="ai-scene-history-item${idx===s.activeIdx?' active':''}" data-ail-hist-idx="${idx}">
+                        <div class="ai-scene-history-thumb">
+                          <svg width="52" height="38" viewBox="0 0 80 60" fill="none"><rect width="80" height="60" fill="#FEFCE8"/><circle cx="30" cy="20" r="8" fill="#FDE68A"/><path d="M20 38 Q30 28 40 38" fill="#FCA5A5"/></svg>
+                        </div>
+                        <div style="flex:1;">
+                          <div style="font-size:13px;font-weight:600;">주인공</div>
+                          <div style="font-size:11.5px;color:#9CA3AF;margin-top:2px;">${s.style.name} · 없음 · ${s.ratio} · 1K</div>
+                        </div>
+                        <div style="font-size:12px;color:#10C7B8;font-weight:600;white-space:nowrap;cursor:pointer;" data-ail-insert>캔버스에 추가 →</div>
+                      </div>
+                    `).join('')}
+                  </div>`}
             </div>
           </div>
         </div>
