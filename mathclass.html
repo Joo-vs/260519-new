@@ -978,10 +978,10 @@
   }
 
   /* Header: 발문 */
-  .tpl-q-row{display:flex;align-items:stretch;gap:12px;margin-bottom:30px;}
+  .tpl-q-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:30px;}
   .tpl-qnum{
     background:#4A5B7C;color:#fff;
-    width:36px;border-radius:6px;
+    width:36px;height:36px;border-radius:6px;
     display:grid;place-items:center;
     font-size:15px;font-weight:700;flex:0 0 36px;
   }
@@ -1179,6 +1179,53 @@
     width:14px;height:14px;border-radius:50%;background:#7B7E8A;
     flex-shrink:0;
   }
+
+  /* 선택지 추가/삭제 +/- 버튼 */
+  .tpl-adddel-wrap{position:relative;padding-right:50px;}
+  .tpl-adddel-group{
+    position:absolute;right:0;top:0;
+    display:flex;flex-direction:column;gap:5px;
+  }
+  .tpl-adddel-btn{
+    width:34px;height:34px;
+    border-radius:9px;border:none;
+    background:#5B6A8F;color:#fff;
+    font-size:22px;font-weight:300;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    line-height:1;
+    transition:background .12s;
+    flex-shrink:0;
+  }
+  .tpl-adddel-btn:hover{background:#3D4F73;}
+  .tpl-adddel-btn.tpl-del-btn{background:#9CA3AF;}
+  .tpl-adddel-btn.tpl-del-btn:hover{background:#6B7280;}
+
+  /* 연결형 열 기반 구조 */
+  .tpl-connect-cols{
+    display:flex;align-items:flex-start;
+    gap:0;margin:8px 0 24px;padding:0 20px;
+  }
+  .tpl-connect-col{
+    flex:1;display:flex;flex-direction:column;gap:10px;
+    min-width:0;
+  }
+  /* 연결형: 항목마다 점이 inline */
+  .tpl-connect-item{display:flex;align-items:center;gap:8px;}
+  .tpl-connect-item .tpl-connect-input{flex:1;}
+  .tpl-col-adddel{display:flex;gap:4px;margin-bottom:2px;}
+  .tpl-col-adddel-btn{
+    width:26px;height:26px;
+    border-radius:7px;border:none;
+    background:#5B6A8F;color:#fff;
+    font-size:16px;font-weight:300;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    line-height:1;
+  }
+  .tpl-col-adddel-btn.tpl-del-btn{background:#9CA3AF;}
+  .tpl-col-adddel-btn:hover{background:#3D4F73;}
+  .tpl-col-adddel-btn.tpl-del-btn:hover{background:#6B7280;}
 
   /* 서술형 활동 */
   .tpl-essay{margin-bottom:20px;}
@@ -12997,35 +13044,45 @@
 
     // ---- 연결형: 2단/3단 전환 + 비율 적용 ----
     if(slide.type === 'template' && (slide.template === '연결형' || slide.template === '연결형 활동')){
-      if(slide.connCols === '3col'){
-        const rows = content.querySelectorAll('.tpl-connect-row');
-        rows.forEach((row, rowIdx) => {
-          row.classList.add('mode-3col');
-          row.innerHTML = `
-            <div class="tpl-connect-input" contenteditable="true" data-field="connInputL${rowIdx}" data-placeholder="선택지를 입력합니다."></div>
-            <span class="tpl-connect-dot"></span>
-            <span class="tpl-connect-dot"></span>
-            <div class="tpl-connect-input" contenteditable="true" data-field="connInputM${rowIdx}" data-placeholder="선택지를 입력합니다."></div>
-            <span class="tpl-connect-dot"></span>
-            <span class="tpl-connect-dot"></span>
-            <div class="tpl-connect-input" contenteditable="true" data-field="connInputR${rowIdx}" data-placeholder="선택지를 입력합니다."></div>
-          `;
-        });
-      }
-      // 비율/사이간격 적용 (좌/중/우 fr, gap px)
-      const rows = content.querySelectorAll('.tpl-connect-row');
-      const left = (slide.connLeft !== undefined) ? slide.connLeft : 38;
-      const right = (slide.connRight !== undefined) ? slide.connRight : 38;
-      const gap = (slide.connGap !== undefined) ? slide.connGap : 24;
-      rows.forEach(row => {
+      const colsEl = content.querySelector('.tpl-connect-cols');
+      if(colsEl){
+        const left  = (slide.connLeft  !== undefined) ? slide.connLeft  : 38;
+        const right = (slide.connRight !== undefined) ? slide.connRight : 38;
+        const gap   = (slide.connGap   !== undefined) ? slide.connGap   : 24;
+        // 3단: M 열이 없으면 삽입
         if(slide.connCols === '3col'){
-          const mid = (slide.connMid !== undefined) ? slide.connMid : 38;
-          row.style.gridTemplateColumns = `${left}fr auto auto ${mid}fr auto auto ${right}fr`;
+          if(!colsEl.querySelector('[data-side="M"]')){
+            const mid = (slide.connMid !== undefined) ? slide.connMid : 38;
+            const midCol = document.createElement('div');
+            midCol.className = 'tpl-connect-col';
+            midCol.dataset.side = 'M';
+            midCol.innerHTML = `
+              <div class="tpl-col-adddel">
+                <button class="tpl-col-adddel-btn" data-col-add="M" type="button">+</button>
+                <button class="tpl-col-adddel-btn tpl-del-btn" data-col-del="M" type="button">−</button>
+              </div>
+              <div class="tpl-connect-item"><span class="tpl-connect-dot"></span><div class="tpl-connect-input" contenteditable="true" data-field="connInputM0" data-placeholder="선택지를 입력합니다."></div><span class="tpl-connect-dot"></span></div>
+              <div class="tpl-connect-item"><span class="tpl-connect-dot"></span><div class="tpl-connect-input" contenteditable="true" data-field="connInputM1" data-placeholder="선택지를 입력합니다."></div><span class="tpl-connect-dot"></span></div>
+            `;
+            // R열 앞에 M열 삽입 (divider 없이 gap으로 구분)
+            const rCol = colsEl.querySelector('[data-side="R"]');
+            if(rCol) colsEl.insertBefore(midCol, rCol);
+          }
         } else {
-          row.style.gridTemplateColumns = `${left}fr auto auto ${right}fr`;
+          // 2단: M 열 제거
+          const mCol = colsEl.querySelector('[data-side="M"]');
+          if(mCol) mCol.remove();
         }
-        row.style.columnGap = `${gap}px`;
-      });
+        // 비율 적용 — 열 flex 비율
+        const cols = colsEl.querySelectorAll('.tpl-connect-col');
+        cols.forEach(col => {
+          const side = col.dataset.side;
+          if(side === 'L') col.style.flex = `${left} 1 0`;
+          else if(side === 'M') col.style.flex = `${(slide.connMid||38)} 1 0`;
+          else if(side === 'R') col.style.flex = `${right} 1 0`;
+        });
+        colsEl.style.gap = `${gap}px`;
+      }
     }
 
     // ---- 서술형 활동: 손글씨 toolbar, 배경색, 패턴 ----
@@ -13467,6 +13524,176 @@
     }
   });
 
+  // [TPL-ADDDEL] 선택지 추가/삭제 +/- 버튼
+  edCanvas.addEventListener('click', (e)=>{
+    const addBtn = e.target.closest('[data-tpl-add]');
+    const delBtn = e.target.closest('[data-tpl-del]');
+    const colAdd = e.target.closest('[data-col-add]');
+    const colDel = e.target.closest('[data-col-del]');
+    if(!addBtn && !delBtn && !colAdd && !colDel) return;
+    e.stopPropagation();
+
+    const s = slides[currentSlideIdx];
+    if(!s || s.type !== 'template') return;
+    const CIRCLE = ['①','②','③','④','⑤','⑥','⑦','⑧','⑨'];
+
+    // ── 선택형 + ──
+    if(addBtn && addBtn.dataset.tplAdd === 'option'){
+      const wrap = edCanvas.querySelector('.tpl-options');
+      if(!wrap) return;
+      const rows = wrap.querySelectorAll('.tpl-option-row');
+      if(rows.length >= 9) return;
+      const idx = rows.length;
+      const row = document.createElement('div');
+      row.className = 'tpl-option-row';
+      row.innerHTML = `<span class="tpl-option-num">${CIRCLE[idx]}</span><div class="tpl-option-input" contenteditable="true" data-field="option${idx+1}" data-placeholder="선택지를 입력합니다."></div>`;
+      wrap.appendChild(row);
+      return;
+    }
+    // ── 선택형 - ──
+    if(delBtn && delBtn.dataset.tplDel === 'option'){
+      const wrap = edCanvas.querySelector('.tpl-options');
+      if(!wrap) return;
+      const rows = wrap.querySelectorAll('.tpl-option-row');
+      if(rows.length <= 2) return;
+      const last = rows[rows.length-1];
+      const num = last.querySelector('.tpl-option-num')?.textContent.trim();
+      if(s.selectedOptions) s.selectedOptions = s.selectedOptions.filter(o=>o!==num);
+      const f = last.querySelector('[data-field]');
+      if(f && s.texts) delete s.texts[f.dataset.field];
+      last.remove();
+      updateAnswerField(s);
+      return;
+    }
+
+    // ── TF형 + ──
+    if(addBtn && addBtn.dataset.tplAdd === 'tf'){
+      const wrap = edCanvas.querySelector('.tpl-tf');
+      if(!wrap) return;
+      const rows = wrap.querySelectorAll('.tpl-tf-row');
+      if(rows.length >= 6) return;
+      const idx = rows.length;
+      const row = document.createElement('div');
+      row.className = 'tpl-tf-row';
+      const l0 = s.btnStyle==='ox'?'O':'T', l1 = s.btnStyle==='ox'?'X':'F';
+      row.innerHTML = `<button class="tpl-tf-letter" type="button">${l0}</button><button class="tpl-tf-letter" type="button">${l1}</button><div class="tpl-tf-input" contenteditable="true" data-field="tfInput${idx}" data-placeholder="선택지를 입력합니다."></div>`;
+      if(s.placement==='right'){ const inp=row.querySelector('.tpl-tf-input'); row.insertBefore(inp,row.querySelector('.tpl-tf-letter')); row.classList.add('placement-right'); }
+      wrap.appendChild(row);
+      return;
+    }
+    // ── TF형 - ──
+    if(delBtn && delBtn.dataset.tplDel === 'tf'){
+      const wrap = edCanvas.querySelector('.tpl-tf');
+      if(!wrap) return;
+      const rows = wrap.querySelectorAll('.tpl-tf-row');
+      if(rows.length <= 2) return;
+      const last = rows[rows.length-1];
+      const f = last.querySelector('[data-field]');
+      if(f && s.texts) delete s.texts[f.dataset.field];
+      last.remove();
+      return;
+    }
+
+    // ── 순서입력형 + ──
+    if(addBtn && addBtn.dataset.tplAdd === 'order'){
+      const wrap = edCanvas.querySelector('.tpl-order');
+      if(!wrap) return;
+      const rows = wrap.querySelectorAll('.tpl-order-row');
+      if(rows.length >= 8) return;
+      const idx = rows.length;
+      const row = document.createElement('div');
+      row.className = 'tpl-order-row';
+      row.innerHTML = `<button class="tpl-order-btn" type="button">선택</button><div class="tpl-order-input" contenteditable="true" data-field="orderInput${idx}" data-placeholder="선택지를 입력합니다."></div>`;
+      wrap.appendChild(row);
+      return;
+    }
+    // ── 순서입력형 - ──
+    if(delBtn && delBtn.dataset.tplDel === 'order'){
+      const wrap = edCanvas.querySelector('.tpl-order');
+      if(!wrap) return;
+      const rows = wrap.querySelectorAll('.tpl-order-row');
+      if(rows.length <= 2) return;
+      const last = rows[rows.length-1];
+      const f = last.querySelector('[data-field]');
+      if(f && s.texts) delete s.texts[f.dataset.field];
+      last.remove();
+      return;
+    }
+
+    // ── 순서조합형 + ──
+    if(addBtn && addBtn.dataset.tplAdd === 'combo'){
+      const wrap = edCanvas.querySelector('.tpl-combo');
+      if(!wrap) return;
+      const items = wrap.querySelectorAll('.tpl-combo-item');
+      if(items.length >= 9) return;
+      // 이전 마지막의 ▶ disabled 제거
+      if(items.length>0){ const lb=items[items.length-1].querySelector('.tpl-combo-arrows button:last-child'); if(lb) lb.classList.remove('disabled'); }
+      const idx = items.length;
+      const item = document.createElement('div');
+      item.className = 'tpl-combo-item';
+      item.innerHTML = `<div class="tpl-combo-input" contenteditable="true" data-field="comboInput${idx}" data-placeholder="선택지를 입력합니다."></div><div class="tpl-combo-arrows"><button type="button">◀</button><span>선택</span><button type="button" class="disabled">▶</button></div>`;
+      wrap.appendChild(item);
+      return;
+    }
+    // ── 순서조합형 - ──
+    if(delBtn && delBtn.dataset.tplDel === 'combo'){
+      const wrap = edCanvas.querySelector('.tpl-combo');
+      if(!wrap) return;
+      const items = wrap.querySelectorAll('.tpl-combo-item');
+      if(items.length <= 2) return;
+      const last = items[items.length-1];
+      const f = last.querySelector('[data-field]');
+      if(f && s.texts) delete s.texts[f.dataset.field];
+      last.remove();
+      const newItems = wrap.querySelectorAll('.tpl-combo-item');
+      if(newItems.length>0){ const lb=newItems[newItems.length-1].querySelector('.tpl-combo-arrows button:last-child'); if(lb) lb.classList.add('disabled'); }
+      return;
+    }
+
+    // ── 연결형 열 + ──
+    if(colAdd){
+      const side = colAdd.dataset.colAdd;
+      const col = edCanvas.querySelector(`.tpl-connect-col[data-side="${side}"]`);
+      if(!col) return;
+      const existItems = col.querySelectorAll('.tpl-connect-item');
+      if(existItems.length >= 8) return;
+      const idx = existItems.length;
+      const itemRow = document.createElement('div');
+      itemRow.className = 'tpl-connect-item';
+      const inp = document.createElement('div');
+      inp.className = 'tpl-connect-input';
+      inp.contentEditable = 'true';
+      inp.dataset.field = `connInput${side}${idx}`;
+      inp.dataset.placeholder = '선택지를 입력합니다.';
+      const dot = document.createElement('span');
+      dot.className = 'tpl-connect-dot';
+      if(side === 'L'){
+        itemRow.appendChild(inp); itemRow.appendChild(dot);
+      } else if(side === 'R'){
+        itemRow.appendChild(dot); itemRow.appendChild(inp);
+      } else { // M: 양쪽 점
+        const dot2 = document.createElement('span');
+        dot2.className = 'tpl-connect-dot';
+        itemRow.appendChild(dot); itemRow.appendChild(inp); itemRow.appendChild(dot2);
+      }
+      col.appendChild(itemRow);
+      return;
+    }
+    // ── 연결형 열 - ──
+    if(colDel){
+      const side = colDel.dataset.colDel;
+      const col = edCanvas.querySelector(`.tpl-connect-col[data-side="${side}"]`);
+      if(!col) return;
+      const existItems = col.querySelectorAll('.tpl-connect-item');
+      if(existItems.length <= 2) return;
+      const last = existItems[existItems.length-1];
+      const inp = last.querySelector('[data-field]');
+      if(inp && s.texts) delete s.texts[inp.dataset.field];
+      last.remove();
+      return;
+    }
+  });
+
   // 캔버스 OX/TF item 클릭 → 정답 토글 (OX형)
   edCanvas.addEventListener('click', (e)=>{
     const oxItem = e.target.closest('.tpl-ox-item');
@@ -13545,21 +13772,20 @@
     applyConnectLayout(s);
   });
 
-  // 연결형 캔버스 grid 비율/gap 적용
+  // 연결형 캔버스 열 비율/gap 적용
   function applyConnectLayout(slide){
-    const rows = edCanvas.querySelectorAll('.tpl-connect-row');
-    rows.forEach(row => {
-      const left = (slide.connLeft !== undefined) ? slide.connLeft : 38;
-      const right = (slide.connRight !== undefined) ? slide.connRight : 38;
-      const gap = (slide.connGap !== undefined) ? slide.connGap : 24;
-      if(slide.connCols === '3col'){
-        const mid = (slide.connMid !== undefined) ? slide.connMid : 38;
-        row.style.gridTemplateColumns = `${left}fr auto auto ${mid}fr auto auto ${right}fr`;
-      } else {
-        row.style.gridTemplateColumns = `${left}fr auto auto ${right}fr`;
-      }
-      row.style.columnGap = `${gap}px`;
+    const colsEl = edCanvas.querySelector('.tpl-connect-cols');
+    if(!colsEl) return;
+    const left  = (slide.connLeft  !== undefined) ? slide.connLeft  : 38;
+    const right = (slide.connRight !== undefined) ? slide.connRight : 38;
+    const gap   = (slide.connGap   !== undefined) ? slide.connGap   : 24;
+    colsEl.querySelectorAll('.tpl-connect-col').forEach(col => {
+      const side = col.dataset.side;
+      if(side === 'L') col.style.flex = `${left} 1 0`;
+      else if(side === 'M') col.style.flex = `${(slide.connMid||38)} 1 0`;
+      else if(side === 'R') col.style.flex = `${right} 1 0`;
     });
+    colsEl.style.gap = `${gap}px`;
   }
 
   // 우측 select (서술형 패턴) 변경 → 캔버스에 즉시 적용
@@ -16291,13 +16517,19 @@
 
   const TEMPLATE_HTML = {
     '선택형': `${TPL_HEADER}
-      <div class="tpl-options">
-        ${['①','②','③','④','⑤'].map((n,i)=>`
-          <div class="tpl-option-row">
-            <span class="tpl-option-num">${n}</span>
-            <div class="tpl-option-input" contenteditable="true" data-field="option${i+1}" data-placeholder="선택지를 입력합니다."></div>
-          </div>
-        `).join('')}
+      <div class="tpl-adddel-wrap">
+        <div class="tpl-options">
+          ${['①','②','③','④','⑤'].map((n,i)=>`
+            <div class="tpl-option-row">
+              <span class="tpl-option-num">${n}</span>
+              <div class="tpl-option-input" contenteditable="true" data-field="option${i+1}" data-placeholder="선택지를 입력합니다."></div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="tpl-adddel-group">
+          <button class="tpl-adddel-btn" data-tpl-add="option" type="button">+</button>
+          <button class="tpl-adddel-btn tpl-del-btn" data-tpl-del="option" type="button">−</button>
+        </div>
       </div>
       ${TPL_FOOTER}`,
 
@@ -16343,62 +16575,84 @@
       ${TPL_FOOTER}`,
 
     'TF형': `${TPL_HEADER}
-      <div class="tpl-tf">
-        <div class="tpl-tf-row">
-          <button class="tpl-tf-letter" type="button">T</button>
-          <button class="tpl-tf-letter" type="button">F</button>
-          <div class="tpl-tf-input" contenteditable="true" data-field="tfInput0" data-placeholder="선택지를 입력합니다."></div>
+      <div class="tpl-adddel-wrap">
+        <div class="tpl-tf">
+          <div class="tpl-tf-row">
+            <button class="tpl-tf-letter" type="button">T</button>
+            <button class="tpl-tf-letter" type="button">F</button>
+            <div class="tpl-tf-input" contenteditable="true" data-field="tfInput0" data-placeholder="선택지를 입력합니다."></div>
+          </div>
+          <div class="tpl-tf-row">
+            <button class="tpl-tf-letter" type="button">T</button>
+            <button class="tpl-tf-letter" type="button">F</button>
+            <div class="tpl-tf-input" contenteditable="true" data-field="tfInput1" data-placeholder="선택지를 입력합니다."></div>
+          </div>
         </div>
-        <div class="tpl-tf-row">
-          <button class="tpl-tf-letter" type="button">T</button>
-          <button class="tpl-tf-letter" type="button">F</button>
-          <div class="tpl-tf-input" contenteditable="true" data-field="tfInput1" data-placeholder="선택지를 입력합니다."></div>
+        <div class="tpl-adddel-group">
+          <button class="tpl-adddel-btn" data-tpl-add="tf" type="button">+</button>
+          <button class="tpl-adddel-btn tpl-del-btn" data-tpl-del="tf" type="button">−</button>
         </div>
       </div>
       ${TPL_FOOTER}`,
 
     '순서입력형': `${TPL_HEADER}
-      <div class="tpl-order">
-        ${[0,1,2,3].map((i)=>`
-          <div class="tpl-order-row">
-            <button class="tpl-order-btn" type="button">선택</button>
-            <div class="tpl-order-input" contenteditable="true" data-field="orderInput${i}" data-placeholder="선택지를 입력합니다."></div>
-          </div>
-        `).join('')}
+      <div class="tpl-adddel-wrap">
+        <div class="tpl-order">
+          ${[0,1,2,3].map((i)=>`
+            <div class="tpl-order-row">
+              <button class="tpl-order-btn" type="button">선택</button>
+              <div class="tpl-order-input" contenteditable="true" data-field="orderInput${i}" data-placeholder="선택지를 입력합니다."></div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="tpl-adddel-group">
+          <button class="tpl-adddel-btn" data-tpl-add="order" type="button">+</button>
+          <button class="tpl-adddel-btn tpl-del-btn" data-tpl-del="order" type="button">−</button>
+        </div>
       </div>
       ${TPL_FOOTER}`,
 
     '순서조합형': `${TPL_HEADER}
-      <div class="tpl-combo">
-        ${[0,1,2,3,4,5].map((i)=>{
-          const isLast = i === 5;
-          return `
-            <div class="tpl-combo-item">
-              <div class="tpl-combo-input" contenteditable="true" data-field="comboInput${i}" data-placeholder="선택지를 입력합니다."></div>
-              <div class="tpl-combo-arrows">
-                <button type="button">◀</button>
-                <span>선택</span>
-                <button type="button"${isLast ? ' class="disabled"' : ''}>▶</button>
+      <div class="tpl-adddel-wrap" style="padding-right:0;">
+        <div class="tpl-combo">
+          ${[0,1,2,3,4,5].map((i)=>{
+            const isLast = i === 5;
+            return `
+              <div class="tpl-combo-item">
+                <div class="tpl-combo-input" contenteditable="true" data-field="comboInput${i}" data-placeholder="선택지를 입력합니다."></div>
+                <div class="tpl-combo-arrows">
+                  <button type="button">◀</button>
+                  <span>선택</span>
+                  <button type="button"${isLast ? ' class="disabled"' : ''}>▶</button>
+                </div>
               </div>
-            </div>
-          `;
-        }).join('')}
+            `;
+          }).join('')}
+        </div>
+        <div style="display:flex;gap:6px;margin-top:10px;">
+          <button class="tpl-adddel-btn" data-tpl-add="combo" type="button" style="width:34px;height:34px;">+</button>
+          <button class="tpl-adddel-btn tpl-del-btn" data-tpl-del="combo" type="button" style="width:34px;height:34px;">−</button>
+        </div>
       </div>
       ${TPL_FOOTER}`,
 
     '연결형': `${TPL_HEADER}
-      <div class="tpl-connect">
-        <div class="tpl-connect-row">
-          <div class="tpl-connect-input" contenteditable="true" data-field="connInputL0" data-placeholder="선택지를 입력합니다."></div>
-          <span class="tpl-connect-dot"></span>
-          <span class="tpl-connect-dot"></span>
-          <div class="tpl-connect-input" contenteditable="true" data-field="connInputR0" data-placeholder="선택지를 입력합니다."></div>
+      <div class="tpl-connect-cols">
+        <div class="tpl-connect-col" data-side="L">
+          <div class="tpl-col-adddel">
+            <button class="tpl-col-adddel-btn" data-col-add="L" type="button">+</button>
+            <button class="tpl-col-adddel-btn tpl-del-btn" data-col-del="L" type="button">−</button>
+          </div>
+          <div class="tpl-connect-item"><div class="tpl-connect-input" contenteditable="true" data-field="connInputL0" data-placeholder="선택지를 입력합니다."></div><span class="tpl-connect-dot"></span></div>
+          <div class="tpl-connect-item"><div class="tpl-connect-input" contenteditable="true" data-field="connInputL1" data-placeholder="선택지를 입력합니다."></div><span class="tpl-connect-dot"></span></div>
         </div>
-        <div class="tpl-connect-row">
-          <div class="tpl-connect-input" contenteditable="true" data-field="connInputL1" data-placeholder="선택지를 입력합니다."></div>
-          <span class="tpl-connect-dot"></span>
-          <span class="tpl-connect-dot"></span>
-          <div class="tpl-connect-input" contenteditable="true" data-field="connInputR1" data-placeholder="선택지를 입력합니다."></div>
+        <div class="tpl-connect-col" data-side="R">
+          <div class="tpl-col-adddel">
+            <button class="tpl-col-adddel-btn" data-col-add="R" type="button">+</button>
+            <button class="tpl-col-adddel-btn tpl-del-btn" data-col-del="R" type="button">−</button>
+          </div>
+          <div class="tpl-connect-item"><span class="tpl-connect-dot"></span><div class="tpl-connect-input" contenteditable="true" data-field="connInputR0" data-placeholder="선택지를 입력합니다."></div></div>
+          <div class="tpl-connect-item"><span class="tpl-connect-dot"></span><div class="tpl-connect-input" contenteditable="true" data-field="connInputR1" data-placeholder="선택지를 입력합니다."></div></div>
         </div>
       </div>
       ${TPL_FOOTER}`,
